@@ -1,2 +1,76 @@
-# vocab-tracker
-The vocab-tracker is a web-based vocabulary tool. No downloads, no account registration required — simply open it in your browser. Designed for test-takers, it helps you save new words and review them until you master them.
+# SAT 生词本 · SAT Vocabulary Trainer
+
+一个**开箱即用**的 SAT 生词记录与复习工具：单文件网页应用（`index.html`），双击即可用，也可部署上线后**任何人通过链接访问**。
+
+- 纯前端 · 无后端 · 无构建 · 无需安装
+- 数据保存在**浏览器本地**（IndexedDB），不上传任何服务器
+- 手机 / 电脑浏览器均可使用，支持中英文界面
+
+## ✨ 功能
+
+**记录生词**
+- 手动输入，或使用浏览器语音识别直接朗读录入
+- 自动调取中文词性、中文释义、美式 / 英式国际音标
+- 支持**词组 / 短语**（如 `preside over`、`give in to`），内置 90+ 高频动词短语
+- 词根词缀自动拆解 + 记忆方法（拆分记忆 / 词根联想 / 拼读记忆 / 例句记忆）
+- 支持一词多义（多个词性对应不同释义）
+- 拼写纠错建议；不在内置词库中的词自动标注 `*`
+
+**复习**
+- 三态复习：新词 → 学习中 → 已记住；记住的词不再重复出现，只复习不会的
+- 模糊 / 不认识自动回队尾稍后再现，错得多的词优先出现
+- 一键"重新学习"，把已记住的词打回重背
+- 单词发音朗读（美音 / 英音，浏览器内置 TTS，无需联网）
+
+**词库管理**
+- 内置 SAT 核心词库（约 3260 词 + 96 条高频动词短语，其中约 577 词为 AI 生成，建议以权威词典为准）
+- 导入生词：支持 **Word（.docx）/ PDF / TXT / CSV**，带进度条与成功提示；内置词库导入额外支持 **Excel（.xlsx/.xls）**
+- 导出 CSV；一键备份（下载 .json 快照）与恢复备份
+- **清空自动备份**：误清空后可一键恢复
+- 撤回最近一次导入；内置词库可浏览、删除、恢复默认
+
+**其他**
+- 中 / 英文界面一键切换
+- 移动端适配，可"添加到主屏幕"当 App 用
+
+## 🚀 快速使用
+
+**本机使用**：直接双击 `index.html` 用浏览器打开即可（Chrome / Edge / Safari 推荐）。
+
+**部署上线（让任何人使用）**：
+
+1. 把这个仓库部署到 GitHub Pages：
+   - 仓库 Settings → Pages → Source 选 `Deploy from a branch` → 分支 `main`、目录 `/ (root)` → Save
+   - 等待 1~2 分钟后访问 `https://<你的用户名>.github.io/<仓库名>/`
+2. 或部署到 Cloudflare Pages / Vercel / Netlify / 任意 Nginx 服务器（静态文件即可）
+3. 把链接发给别人，浏览器打开即可使用
+
+> 注意：**语音录入（录音）需要 HTTPS 环境**。GitHub Pages / Cloudflare Pages 默认支持；用裸 IP 或 http 只能使用除录音外的全部功能。单词发音朗读（TTS）不受影响。
+
+## 🔄 更新到新版本
+
+应用更新后，只需要替换仓库里的 `index.html` 一个文件，**线上链接保持不变**：
+
+1. 在对话里下载最新版的 `index.html`
+2. 打开 GitHub 仓库 → **Add file → Upload files** → 选中新的 `index.html`（覆盖同名文件）→ **Commit changes**
+3. 等 1 分钟左右，线上地址自动更新，链接不变；别人收藏的链接也始终有效
+
+> 提示：如需保留旧版本回退，可在上传前先在仓库里把当前 `index.html` 重命名备份（如 `index-v1.html`）。
+
+## 💾 数据说明
+
+- 所有数据（生词、释义、学习进度）只存在**使用者自己的浏览器**里，与服务器无关，互不干扰
+- 换设备 / 清缓存前，请在「词库 → 更多 → 备份数据」下载备份，再到新设备「恢复备份」
+- 想把自己的词库分享给别人：导出 CSV 或备份文件，对方导入即可
+
+## 🛠 技术说明
+
+- 单文件 `index.html`：原生 HTML + CSS + JavaScript，无任何框架与构建步骤
+- 存储：浏览器 IndexedDB（本地）
+- 词典：内置 SAT 词库 + 短语库为主，未命中时尝试免费词典 API（dictionaryapi.dev）
+- 语音识别：浏览器 Web Speech API（需 HTTPS）
+- 发音：浏览器 Speech Synthesis（TTS）
+
+## 📝 免责声明
+
+内置词库与短语库中标注"AI 生成"的部分（约 577 词及短语）为自动生成内容，个别释义 / 音标可能存在偏差，**建议以权威词典（如剑桥词典、牛津词典）为准**。欢迎通过详情页手动修正。
