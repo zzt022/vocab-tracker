@@ -70,6 +70,7 @@ header.appbar{position:sticky;top:0;z-index:20;background:rgba(244,245,247,.92);
 .badge.learning{color:var(--st-learning);border-color:var(--st-learning-bd);background:var(--st-learning-bg);}
 .badge.mastered{color:var(--st-mastered);border-color:var(--st-mastered-bd);background:var(--st-mastered-bg);}
 .badge.pending{color:#7C3AED;border-color:#C4B5FD;background:#F5F3FF;}
+.badge.wrong{color:var(--danger);border-color:var(--danger-bd);background:var(--danger-bg);}
 .empty{padding:46px 20px;text-align:center;color:var(--text3);font-size:13.5px;}
 .empty .ic{font-size:34px;margin-bottom:10px;display:block;}
 .empty .sub{font-size:12px;color:var(--text3);margin-top:6px;}
@@ -127,6 +128,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 .flipcard .ipa{font-size:15px;color:var(--text2);margin-top:14px;line-height:1.7;}
 .flipcard .ipa b{color:var(--text);font-weight:600;}
 .flipcard .hint{font-size:12.5px;color:var(--text3);margin-top:22px;}
+.flipcard .rv-note{display:inline-block;margin-top:12px;font-size:12px;color:var(--danger);background:var(--danger-bg);border:1px solid var(--danger-bd);padding:4px 12px;border-radius:99px;font-weight:600;}
 .flipcard .pos{font-size:15px;color:var(--text2);margin-top:12px;font-weight:600;}
 .flipcard .meaning{font-size:17px;font-weight:600;margin-top:4px;}
 .flipcard .rows{margin-top:16px;width:100%;text-align:left;}
@@ -354,6 +356,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
         <div style="font-size:12.5px;color:var(--text2);"><span data-i18n="rv_queue">今日复习队列</span> <b id="rv-queue-num" style="color:var(--text);">0</b> <span data-i18n="builtin_word">词</span> · <span data-i18n="rv_new">待学习</span> <b id="rv-new-num" style="color:var(--st-new);">0</b> · <span data-i18n="rv_learning">学习中</span> <b id="rv-learn-num" style="color:var(--st-learning);">0</b></div>
         <div class="progressbar"><i id="rv-progress" style="width:0%"></i></div>
       </div>
+      <div class="chips" id="rv-chips"></div>
       <div id="rv-body"></div>
     </section>
 
@@ -522,6 +525,8 @@ const I18N={
     t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音',
     t_flip:'翻面查看', t_loading:'导入中…', t_done:'完成', page_of:' 页 · 共 ', words2:' 词',
     st_all:'全部', builtin_extra:'为你导入', builtin_more:'，另有 ', builtin_add:'收录', builtin_added:'已收录',
+    wrong_times:'未记住', times_word:'次',
+    rv_empty_new:'暂无待学习的单词，去记录页添加吧', rv_empty_learning:'暂无学习中的单词，复习后自动进入该状态', rv_empty_mastered:'还没有已记住的单词，坚持复习就会记住',
     del:'删除', del_from_builtin:'从内置词库删除', builtin_del_ok:'已从内置词库删除 ',
     builtin_del_c1:'确定从内置词库删除「', builtin_del_c2:'」？删除后录入该词将不再自动补全释义。',
     prev:'上一页', next:'下一页',
@@ -536,6 +541,8 @@ const I18N={
     fuzzy:'模糊', yes:'认识', no:'不认识', meaning_missing:'（释义待补充，可点卡片编辑）',
     rv_next:'下一个', review_tip:'认识 → 移出复习队列；模糊 / 不认识 → 稍后再出现 · 点击单词可编辑',
     review_tip2:'认识 → 答对释义后移出队列；下一个 → 继续学习 · 点击单词可编辑',
+    rv_pending_fuzzy:'已标记「模糊」：确认点「下一个」，或答对释义点「认识」',
+    rv_pending_no:'已标记「不认识」：确认点「下一个」，或答对释义点「认识」',
     reset_c:'将全部「已记住」的词重置回学习中？', regen_ok:'已重新生成，可继续编辑',
     del_confirm1:'删除「', del_confirm2:'」？',
     voice_wechat:'微信内置浏览器无法录音。请点右上角「···」→「在 Safari 中打开」；安卓点「在浏览器中打开」后即可使用',
@@ -598,6 +605,8 @@ const I18N={
     t_star_hint:'Not in built-in library; meaning may come from online lookup or manual edit', t_am:'US', t_uk:'UK', speak:'Speak', speak_am:'Speak US', speak_uk:'Speak UK',
     t_flip:'Flip to see answer', t_loading:'Importing…', t_done:'Done', page_of:' pages · ', words2:' words',
     st_all:'All', builtin_extra:'imported by you', builtin_more:', another ', builtin_add:'Add', builtin_added:'Added',
+    wrong_times:'Not yet mastered', times_word:'times',
+    rv_empty_new:'No new words yet — add some on the Record tab', rv_empty_learning:'No learning words — words move here after review', rv_empty_mastered:'No mastered words yet — keep reviewing and you\'ll get there',
     del:'Delete', del_from_builtin:'Delete from built-in library', builtin_del_ok:'Deleted from built-in library: ',
     builtin_del_c1:'Delete "', builtin_del_c2:'" from the built-in library? Its meaning will no longer auto-fill when added.',
     prev:'Prev', next:'Next',
@@ -612,6 +621,8 @@ const I18N={
     fuzzy:'Fuzzy', yes:'Know it', no:'Don\'t know', meaning_missing:'(meaning pending — tap the card to edit)',
     rv_next:'Next', review_tip:'Know it → out of the queue; Fuzzy / Don\'t know → appears again later · Tap the word to edit',
     review_tip2:'Know it → leave the queue after a correct answer; Next → keep studying · Tap the word to edit',
+    rv_pending_fuzzy:'Marked "Fuzzy": tap Next to confirm, or answer the meaning to tap Know it',
+    rv_pending_no:'Marked "Don\'t know": tap Next to confirm, or answer the meaning to tap Know it',
     reset_c:'Reset all "Mastered" words back to Learning?', regen_ok:'Regenerated, feel free to edit',
     del_confirm1:'Delete "', del_confirm2:'"?',
     voice_wechat:'Recording is blocked inside WeChat. Tap “···” top-right → “Open in Safari” (iOS) or “Open in browser” (Android)',
@@ -4381,7 +4392,7 @@ async function addWord(word, source){
 
 /* ===== 全局状态与渲染 ===== */
 let allCards=[], libFilter='all', libSearch='';
-let reviewQueue=[], reviewIdx=0, reviewFlipped=false;
+let reviewQueue=[], reviewIdx=0, reviewFlipped=false, reviewFilter='all';
 let editingId=null, lastView='record', reviewFrom='record';
 /* 各状态计数缓存：refresh 时算一次，各渲染函数共用，避免重复遍历 */
 let __counts={new:0,learning:0,mastered:0};
@@ -4401,10 +4412,13 @@ function counts(){
   allCards.forEach(x=>{ if(c[x.status]!=null) c[x.status]++; });
   return c;
 }
-/* 复习队列构建规则（refresh 与复习页共用） */
-function buildQueue(cards){
-  return cards.filter(c=>c.status==='new'||c.status==='learning')
-    .sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
+/* 复习队列构建规则（refresh 与复习页共用）；filter: all / new / learning */
+function buildQueue(cards, filter){
+  filter=filter||'all';
+  let base;
+  if(filter==='mastered') base=cards.filter(c=>c.status==='mastered');
+  else base=cards.filter(c=>(c.status==='new'||c.status==='learning')&&(filter==='all'||c.status===filter));
+  return base.sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
 }
 function renderAll(){ __counts=counts(); renderHeader(); renderRecent(); renderLibrary(); renderReview(); }
 
@@ -4430,10 +4444,11 @@ function renderRecent(){
 }
 function wordItemHTML(c){
   const pending=c.pending?' <span class="badge pending">'+t('status_pending')+'</span>':'';
+  const wrong=(c.status==='learning'&&c.wrongCount>0)?' <span class="badge wrong" title="'+t('wrong_times')+' '+c.wrongCount+'">✕'+c.wrongCount+'</span>':'';
   const star=lookupBuiltin(c.word)?'':'<span class="star" title="'+t('t_star_hint')+'">*</span>';
   return '<div class="worditem"><span class="w">'+esc(c.word)+star+'</span>'+
     '<span class="d">'+ipaWrap(c.phonetic_us)+' '+ipaWrap(c.phonetic_uk)+'<br>'+esc(c.pos+' '+(c.meaning||t('meaning_pending')))+'</span>'+
-    '<span class="badge '+esc(c.status)+'">'+STATUS_NAME[c.status]+'</span>'+pending+
+    '<span class="badge '+esc(c.status)+'">'+STATUS_NAME[c.status]+'</span>'+wrong+pending+
     '<span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span></div>';
 }
 
@@ -4881,7 +4896,7 @@ $('builtin-restore').addEventListener('click',async()=>{
 
 /* ===== 复习页 ===== */
 function reviewQueueBuild(){
-  reviewQueue=buildQueue(allCards);
+  reviewQueue=buildQueue(allCards, reviewFilter);
   reviewIdx=0; reviewFlipped=false;
 }
 function renderReview(){
@@ -4889,9 +4904,22 @@ function renderReview(){
   $('rv-queue-num').textContent=c.new+c.learning;
   $('rv-new-num').textContent=c.new;
   $('rv-learn-num').textContent=c.learning;
+  /* 状态筛选 chips：全部 / 待学习 / 学习中 / 已记住 */
+  const chips=[['all',t('st_all')+' '+(c.new+c.learning)],['new',t('rv_new')+' '+c.new],['learning',t('rv_learning')+' '+c.learning],['mastered',t('rv_mastered')+' '+c.mastered]];
+  $('rv-chips').innerHTML=chips.map(([k,label])=>'<button class="chip'+(reviewFilter===k?' on':'')+'" data-rf="'+k+'">'+label+'</button>').join('');
+  $('rv-chips').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{
+    if(reviewFilter===el.dataset.rf) return;
+    reviewFilter=el.dataset.rf; reviewQueueBuild(); renderReview();
+  }));
   if(reviewQueue.length===0) reviewQueueBuild();
   if(!reviewQueue.length){
-    $('rv-progress').style.width='100%';    $('rv-body').innerHTML='<div style="padding:20px 14px 10px;"><div class="donebox"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2E8B57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><div class="t">'+t('t_review_done')+'</div><div class="s">'+t('t_review_stats')+' '+c.mastered+' · '+t('st_new')+' '+c.new+' · '+t('st_learning')+' '+c.learning+'</div><div style="margin-top:16px;display:flex;gap:10px;justify-content:center;"><button id="rv-reset" class="btn">'+t('t_relearn')+'</button><button id="rv-mastered" class="btn">'+t('t_view_mastered')+'</button></div></div></div>';
+    $('rv-progress').style.width='100%';
+    if(reviewFilter!=='all'){
+      /* 筛选状态下无词：显示对应空提示，不显示"复习完成" */
+      $('rv-body').innerHTML='<div class="donebox" style="margin:16px auto;max-width:460px;"><div class="t">'+t(reviewFilter==='new'?'rv_empty_new':reviewFilter==='learning'?'rv_empty_learning':'rv_empty_mastered')+'</div></div>';
+      return;
+    }
+    $('rv-body').innerHTML='<div style="padding:20px 14px 10px;"><div class="donebox"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2E8B57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><div class="t">'+t('t_review_done')+'</div><div class="s">'+t('t_review_stats')+' '+c.mastered+' · '+t('st_new')+' '+c.new+' · '+t('st_learning')+' '+c.learning+'</div><div style="margin-top:16px;display:flex;gap:10px;justify-content:center;"><button id="rv-reset" class="btn">'+t('t_relearn')+'</button><button id="rv-mastered" class="btn">'+t('t_view_mastered')+'</button></div></div></div>';
     const rb=$('rv-body');
     rb.querySelector('#rv-reset')?.addEventListener('click',resetMastered);
     rb.querySelector('#rv-mastered')?.addEventListener('click',()=>{libFilter='mastered';showView('library');});
@@ -4901,19 +4929,27 @@ function renderReview(){
   $('rv-progress').style.width=(total?Math.round(done/total*100):0)+'%';
   const card=reviewQueue[reviewIdx]||reviewQueue[0];
   if(!card) return;
+  const rvNote=(card.status==='learning'&&card.wrongCount>0)?'<div style="margin-top:12px;"><span class="badge wrong" title="'+t('wrong_times')+' '+card.wrongCount+' '+t('times_word')+'">✕'+card.wrongCount+'</span></div>':'';
   if(!reviewFlipped){
     $('rv-body').innerHTML=
     '<div class="reviewstage"><div class="flipcard"><div class="w">'+esc(card.word)+(lookupBuiltin(card.word)?'':' <span class="star" title="'+t('not_in_builtin')+'">*</span>')+'</div>'+
+    rvNote+
     '<div class="ipa">'+t('t_am')+' '+ipaWrap(card.phonetic_us)+(card.phonetic_uk?' &nbsp;<b>·</b>&nbsp; '+t('t_uk')+' '+ipaWrap(card.phonetic_uk):'')+spkBtn(card.word,'us',t('speak_am'))+'</div>'+
     '<button id="rv-flip" style="margin-top:22px;border:none;background:none;color:var(--st-mastered);font-size:14.5px;font-weight:600;cursor:pointer;">'+t('t_flip')+'</button></div>'+
     '<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark no" data-m="no"><span class="mi">✕</span>'+t('no')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button></div>'+
     '<div class="reviewtip">'+(done+1)+' / '+total+'</div></div>';
     bindSpeakers($('rv-body'));
     $('rv-flip').addEventListener('click',()=>{reviewFlipped=true;renderReview();});
-    $('rv-body').querySelectorAll('.mark[data-m]').forEach(b=>b.addEventListener('click',()=>markReview(b.dataset.m)));
+    $('rv-body').querySelectorAll('.mark[data-m]').forEach(b=>b.addEventListener('click',()=>{
+      const m=b.dataset.m;
+      if(m==='fuzzy'||m==='no'){ markFuzzyNow(m); __reviewPending=m; reviewFlipped=true; renderReview(); }
+      else markReview(m);
+    }));
   }else{
     $('rv-body').innerHTML=
     '<div class="reviewstage"><div class="flipcard"><div class="w">'+esc(card.word)+(lookupBuiltin(card.word)?'':' <span class="star" title="'+t('not_in_builtin')+'">*</span>')+'</div>'+
+    rvNote+
+    '<div class="ipa">'+t('t_am')+' '+ipaWrap(card.phonetic_us)+(card.phonetic_uk?' &nbsp;<b>·</b>&nbsp; '+t('t_uk')+' '+ipaWrap(card.phonetic_uk):'')+spkBtn(card.word,'us',t('speak_am'))+'</div>'+
     '<div class="pos">'+esc(card.pos||'')+'</div><div class="meaning">'+esc(card.meaning||t('meaning_missing'))+'</div>'+
     '<div class="rows">'+
     (card.root?'<div class="rrow"><b>'+t('f_root')+'</b>'+esc(card.root)+'</div>':'')+
@@ -4921,26 +4957,42 @@ function renderReview(){
     (card.example?'<div class="rrow"><b>'+t('f_example_short')+'</b><em>'+esc(card.example)+'</em></div>':'')+
     '</div></div>'+
     '<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'+
-    '<div class="reviewtip">'+t('review_tip2')+'</div></div>';
+    '<div class="reviewtip">'+(__reviewPending=== 'fuzzy'?t('rv_pending_fuzzy'):__reviewPending==='no'?t('rv_pending_no'):t('review_tip2'))+'</div></div>';
     const body=$('rv-body');
     body.querySelectorAll('.mark').forEach(b=>b.addEventListener('click',()=>markReview(b.dataset.m)));
     body.querySelector('.flipcard .w')?.addEventListener('click',()=>openCard(card.id));
   }
 }
 
+/* 正面点「模糊/不认识」后先翻面看答案：点击瞬间即标记为学习中（即时生效），翻面后由「下一个」确认队列移动 */
+let __reviewPending=null;
+
+/* 即时标记：点「模糊/不认识」立刻写入学习状态，不等翻面确认 */
+function markFuzzyNow(m){
+  const card=reviewQueue[reviewIdx];
+  if(!card) return;
+  card.status='learning'; card.wrongCount++;
+  DB.put(card);
+}
+
 async function markReview(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
+  let alreadyMarked=false;
   if(m==='yes'){
     /* 「认识」需要先通过中文释义验证，答对才真正标记为已记住 */
     const pass=await verifyMeaning(card);
     if(!pass) return; /* 答错/取消：不标记，停留在当前卡片 */
+    __reviewPending=null;
     toast(t('vm_pass'));
+  }
+  if(m==='next' && __reviewPending){ /* 翻面后点「下一个」：确认正面所选标记，状态已即时写入 */
+    m=__reviewPending; __reviewPending=null; alreadyMarked=true;
   }
   card.reviewCount++; card.lastReviewedAt=Date.now();
   if(m==='yes'){ card.status='mastered'; }
-  else if(m==='fuzzy'||m==='no'){ card.status='learning'; card.wrongCount++; }
-  /* m==='next'：翻面后继续下一词，保持当前学习状态不变 */
+  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; }
+  /* m==='next' 且无待定标记：继续下一词，保持当前学习状态不变 */
   await DB.put(card);
   reviewFlipped=false;
   reviewQueue.splice(reviewIdx,1);
