@@ -171,6 +171,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 /* ===== 语音覆盖层 ===== */
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
+#vm-voice-overlay{z-index:70;align-items:flex-end;padding-bottom:5vh;}
 .ovbox{width:100%;max-width:400px;background:var(--card);border-radius:22px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.25);animation:fade .2s;}
 .ovbox .ot{font-size:17px;font-weight:700;text-align:center;}
 .ovbox .os{font-size:12.5px;color:var(--text2);text-align:center;margin-top:5px;}
@@ -193,6 +194,11 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 .modalbox .mt{font-size:17px;font-weight:700;}
 .modalbox .ms{font-size:12.5px;color:var(--text2);margin-top:6px;line-height:1.6;}
 .modalbox .mfield{margin-top:14px;}
+.vm-mic{width:52px;height:52px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:none;cursor:pointer;margin-top:14px;transition:background .15s;}
+.vm-mic svg{width:22px;height:22px;}
+.vm-mic:active{transform:scale(.95);}
+.vm-mic.live{background:var(--danger,#d9504f);animation:micpulse 1.1s ease-in-out infinite;}
+@keyframes micpulse{0%,100%{opacity:1;}50%{opacity:.55;}}
 .vmerr{font-size:12.5px;color:#D0342C;margin-top:8px;font-weight:600;}
 .dropzone{margin-top:14px;border:2px dashed #C9CBD1;border-radius:14px;padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;color:var(--text2);font-size:13px;cursor:pointer;background:#FAFAFB;line-height:1.5;}
 .dropzone svg{color:#9CA3AF;flex:0 0 auto;}
@@ -441,6 +447,24 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
   </div>
 </div>
 
+<!-- ===== 确认掌握：中文语音输入覆盖层（交互与记录页语音录入一致） ===== -->
+<div id="vm-voice-overlay" class="overlay">
+  <div class="ovbox">
+    <div class="ot" data-i18n="vmv_title">语音输入中文意思</div>
+    <div class="os" id="vmv-sub">说出该单词的中文意思</div>
+    <div class="micwrap"><div id="vmv-mic-icon" class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 19v3"/></svg></div></div>
+    <div class="livetext" id="vmv-live"></div>
+    <div class="recogcard" id="vmv-result" style="display:none;">
+      <div class="rl" data-i18n="voice_result">识别结果（可编辑修正）</div>
+      <input id="vmv-input" class="input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="ovacts">
+      <button id="vmv-cancel" class="btn" data-i18n="cancel">取消</button>
+      <button id="vmv-confirm" class="btn primary" style="display:none;">确定</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== 导入弹窗 ===== -->
 <div id="import-modal" class="modal">
   <div class="modalbox">
@@ -503,7 +527,12 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
   <div class="modalbox">
     <div class="mt" id="vm-title">验证释义</div>
     <div class="ms" id="vm-msg"></div>
-    <input id="vm-input" class="input mfield" placeholder="输入中文意思" autocomplete="off" autocapitalize="off" spellcheck="false" />
+    <div class="inputrow">
+      <input id="vm-input" class="input mfield" placeholder="输入中文意思" autocomplete="off" autocapitalize="off" spellcheck="false" />
+      <button id="vm-mic" class="vm-mic" title="语音输入中文意思" aria-label="语音输入中文意思">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 19v3"/></svg>
+      </button>
+    </div>
     <div class="vmerr" id="vm-err" style="display:none;">回答不正确，再想想</div>
     <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end;">
       <button id="vm-cancel" class="btn sm ghost" data-i18n="cancel">取消</button>
@@ -602,7 +631,7 @@ const I18N={
     t_saved_ok:'已保存', t_deleted:'已删除', t_need_word:'请输入英文单词', t_keep_one:'至少保留一行词义',
     t_review_done:'今日单词已复习完', t_review_stats:'已记住', t_relearn:'重新学习已记住词', t_view_mastered:'查看已记住词',
     t_re_added:'已重新加入复习队列', t_re_fuzzy:'已标记为模糊，稍后复习', t_re_yes:'已记住', t_re_no:'还不认识',
-    vm_title:'确认掌握', vm_msg1:'请输入「', vm_msg2:'」的中文意思', vm_ph:'输入中文意思', vm_wrong:'回答不正确，再想想', vm_pass:'✓ 答对了，已记住', vm_nomeaning:'该词暂无释义，无法验证，将直接标记为已记住',
+    vm_title:'确认掌握', vm_msg1:'请输入「', vm_msg2:'」的中文意思', vm_ph:'输入中文意思', vm_wrong:'回答不正确，再想想', vm_pass:'✓ 答对了，已记住', vm_nomeaning:'该词暂无释义，无法验证，将直接标记为已记住', vmv_title:'语音输入中文意思', vmv_sub:'说出该单词的中文意思',
     t_lookup_fail:'离线/查询失败，可手动填写', t_bg_done:'✓ 在线释义补全完成', t_bg_doing:'后台在线补全释义中：',
     t_regenerate:'已重新生成', t_mnemonic_new:'已生成新的记忆方法',
     t_builtin_import_ok:'内置词库导入完成', t_builtin_clear_ok:'已清空内置词库', t_builtin_restore_ok:'已恢复默认词库',
@@ -689,7 +718,7 @@ const I18N={
     t_saved_ok:'Saved', t_deleted:'Deleted', t_need_word:'Please enter an English word', t_keep_one:'Keep at least one meaning row',
     t_review_done:'All words reviewed for today', t_review_stats:'Mastered', t_relearn:'Re-learn mastered words', t_view_mastered:'View mastered words',
     t_re_added:'Back in the review queue', t_re_fuzzy:'Marked fuzzy, will appear again', t_re_yes:'Mastered', t_re_no:'Not yet',
-    vm_title:'Confirm mastery', vm_msg1:'Type the Chinese meaning of "', vm_msg2:'"', vm_ph:'Chinese meaning', vm_wrong:'Not quite right, try again', vm_pass:'✓ Correct — mastered', vm_nomeaning:'No meaning available; will be marked as mastered',
+    vm_title:'Confirm mastery', vm_msg1:'Type the Chinese meaning of "', vm_msg2:'"', vm_ph:'Chinese meaning', vm_wrong:'Not quite right, try again', vm_pass:'✓ Correct — mastered', vm_nomeaning:'No meaning available; will be marked as mastered', vmv_title:'Say the Chinese meaning', vmv_sub:'Say the Chinese meaning of the word',
     t_lookup_fail:'Offline / lookup failed, fill in manually', t_bg_done:'✓ Online definitions complete', t_bg_doing:'Fetching online definitions:',
     t_regenerate:'Regenerated', t_mnemonic_new:'New mnemonic generated',
     t_builtin_import_ok:'Built-in library imported', t_builtin_clear_ok:'Built-in library cleared', t_builtin_restore_ok:'Default library restored',
@@ -5510,14 +5539,65 @@ function answerHit(card, input){
     return a.length>=2 && (b.includes(a)||a.includes(b)||a.replace(/[^\u4e00-\u9fa5]/g,'')===b.replace(/[^\u4e00-\u9fa5]/g,''));
   });
 }
+/* 认识前释义验证：中文语音输入（交互与记录页语音录入一致：覆盖层 + 实时识别 + 可编辑 + 确认/取消） */
+let vmRecognition=null;
+$('vm-mic').addEventListener('click',()=>{
+  if(vmRecognition) return;
+  if(isWeChat()){ toast(t('voice_wechat')); return; }
+  if(!voiceSupported()){ toast(t('voice_unsupported2')); return; }
+  const card=reviewQueue[reviewIdx];
+  $('vmv-sub').textContent=card?t('vm_msg1')+card.word+t('vm_msg2'):t('vmv_sub');
+  $('vmv-live').textContent=''; $('vmv-result').style.display='none'; $('vmv-confirm').style.display='none';
+  $('vmv-input').value='';
+  $('vm-voice-overlay').classList.add('show');
+  $('vmv-mic-icon').classList.add('live');
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  vmRecognition=new SR();
+  vmRecognition.lang='zh-CN'; vmRecognition.interimResults=true; vmRecognition.continuous=false; vmRecognition.maxAlternatives=3;
+  vmRecognition.onresult=e=>{
+    let interim='', final='';
+    for(let i=0;i<e.results.length;i++){
+      const r=e.results[i];
+      if(r.isFinal) final+=r[0].transcript; else interim+=r[0].transcript;
+    }
+    if(final.trim()){
+      $('vmv-input').value=final.trim();
+      $('vmv-result').style.display='block';
+      $('vmv-confirm').style.display='block';
+      $('vmv-mic-icon').classList.remove('live');
+      vmRecognition.stop();
+    }else if(interim.trim()){ $('vmv-live').textContent=t('voice_listening')+interim; }
+  };
+  vmRecognition.onerror=e=>{
+    $('vmv-mic-icon').classList.remove('live');
+    vmRecognition=null;
+    if(e.error==='aborted') return;
+    const map={'not-allowed':t('voice_perm'),'no-speech':t('voice_nospeech'),'audio-capture':t('voice_audiocap'),'network':t('voice_network')};
+    $('vmv-live').textContent=map[e.error]||(t('voice_fail1')+e.error);
+  };
+  vmRecognition.onend=()=>{ $('vmv-mic-icon').classList.remove('live'); vmRecognition=null; };
+  try{ vmRecognition.start(); }catch(err){ $('vmv-mic-icon').classList.remove('live'); vmRecognition=null; $('vmv-live').textContent=t('voice_start_fail'); }
+});
+$('vmv-cancel').addEventListener('click',()=>{ if(vmRecognition) try{vmRecognition.stop();}catch(e){} $('vm-voice-overlay').classList.remove('show'); });
+$('vmv-confirm').addEventListener('click',()=>{
+  const v=$('vmv-input').value.trim();
+  $('vm-voice-overlay').classList.remove('show');
+  if(vmRecognition) try{ vmRecognition.stop(); }catch(e){}
+  if(v){ $('vm-input').value=v; $('vm-input').focus(); }
+});
+$('vm-voice-overlay').addEventListener('click',e=>{
+  if(e.target===$('vm-voice-overlay')){ if(vmRecognition) try{vmRecognition.stop();}catch(e){} $('vm-voice-overlay').classList.remove('show'); }
+});
+$('vmv-input').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('vmv-confirm').click(); } });
 $('vm-ok').addEventListener('click',()=>{
+  if(vmRecognition) try{ vmRecognition.stop(); }catch(e){}
   const card=reviewQueue[reviewIdx];
   if(!card) return;
   if(!meaningKeywords(card).length){ vmClose(true); return; } /* 无释义：直接通过 */
   if(answerHit(card,$('vm-input').value)){ vmClose(true); }
   else{ $('vm-err').style.display='block'; $('vm-input').value=''; setTimeout(()=>{ const el=$('vm-input'); if(el) el.focus(); },30); }
 });
-$('vm-cancel').addEventListener('click',()=>vmClose(false));
+$('vm-cancel').addEventListener('click',()=>{ if(vmRecognition) try{ vmRecognition.stop(); }catch(e){} vmClose(false); });
 $('vm-modal').addEventListener('click',e=>{ if(e.target===$('vm-modal')) vmClose(false); });
 $('vm-input').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('vm-ok').click(); } });
 
