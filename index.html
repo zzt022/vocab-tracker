@@ -641,7 +641,7 @@ const I18N={
     t_flip:'翻面查看', t_loading:'导入中…', t_done:'完成', page_of:' 页 · 共 ', words2:' 词',
     st_all:'全部', builtin_extra:'为你导入', builtin_more:'，另有 ', builtin_add:'收录', builtin_added:'已收录',
     wrong_times:'未记住', times_word:'次',
-    rv_empty_new:'暂无待学习的单词，去记录页添加吧', rv_empty_learning:'暂无学习中的单词，复习后自动进入该状态', rv_empty_mastered:'还没有已记住的单词，坚持复习就会记住',
+    rv_empty_new:'暂无待学习的单词，去记录页添加吧', rv_empty_learning:'暂无学习中的单词，复习后自动进入该状态', rv_empty_mastered:'还没有已记住的单词，坚持复习就会记住', rv_no_match:'没有匹配的单词：',
     del:'删除', del_from_builtin:'从内置词库删除', builtin_del_ok:'已从内置词库删除 ',
     builtin_del_c1:'确定从内置词库删除「', builtin_del_c2:'」？删除后录入该词将不再自动补全释义。',
     prev:'上一页', next:'下一页',
@@ -728,7 +728,7 @@ const I18N={
     t_flip:'Flip to see answer', t_loading:'Importing…', t_done:'Done', page_of:' pages · ', words2:' words',
     st_all:'All', builtin_extra:'imported by you', builtin_more:', another ', builtin_add:'Add', builtin_added:'Added',
     wrong_times:'Not yet mastered', times_word:'times',
-    rv_empty_new:'No new words yet — add some on the Record tab', rv_empty_learning:'No learning words — words move here after review', rv_empty_mastered:'No mastered words yet — keep reviewing and you\'ll get there',
+    rv_empty_new:'No new words yet — add some on the Record tab', rv_empty_learning:'No learning words — words move here after review', rv_empty_mastered:'No mastered words yet — keep reviewing and you\'ll get there', rv_no_match:'No matching words:',
     del:'Delete', del_from_builtin:'Delete from built-in library', builtin_del_ok:'Deleted from built-in library: ',
     builtin_del_c1:'Delete "', builtin_del_c2:'" from the built-in library? Its meaning will no longer auto-fill when added.',
     prev:'Prev', next:'Next',
@@ -5364,21 +5364,32 @@ $('builtin-restore').addEventListener('click',async()=>{
 });
 
 /* ===== 复习页 ===== */
-let reviewQ='';
+let reviewQ='', reviewQueueReady=false;
+function rvSearchNorm(q){ return String(q||'').trim().toLowerCase().replace(/[\uFF01-\uFF5E]/g,ch=>String.fromCharCode(ch.charCodeAt(0)-0xFEE0)).replace(/\u3000/g,' '); }
+function rvSearchRE(q){
+  let qre=null;
+  if(q.includes('*')&&q!=='*'){
+    try{ qre=new RegExp('^'+q.split('*').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('.*')+'$','i'); }catch(_){ qre=null; }
+  }
+  return qre;
+}
+function rvStats(){
+  const q=rvSearchNorm(reviewQ);
+  let arr=allCards;
+  if(q){ const qre=rvSearchRE(q); arr=allCards.filter(c=>cardSearchHit(c,q,qre)); }
+  const n=arr.filter(x=>x.status==='new').length, l=arr.filter(x=>x.status==='learning').length, m=arr.filter(x=>x.status==='mastered').length;
+  return {total:arr.length,new:n,learning:l,mastered:m};
+}
 function reviewQueueBuild(){
   reviewQueue=buildQueue(allCards, reviewFilter);
-  const q=reviewQ.trim().toLowerCase().replace(/[\uFF01-\uFF5E]/g,ch=>String.fromCharCode(ch.charCodeAt(0)-0xFEE0)).replace(/\u3000/g,' '); /* 全角→半角 */
+  const q=rvSearchNorm(reviewQ);
   if(q){
-    let qre=null;
-    if(q.includes('*')&&q!=='*'){
-      try{ qre=new RegExp('^'+q.split('*').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('.*')+'$','i'); }catch(_){ qre=null; }
-    }
-    reviewQueue=reviewQueue.filter(c=>cardSearchHit(c,q,qre));
+    reviewQueue=reviewQueue.filter(c=>cardSearchHit(c,q,rvSearchRE(q)));
   }
-  reviewIdx=0; reviewFlipped=false;
+  reviewIdx=0; reviewFlipped=false; reviewQueueReady=true;
 }
 function renderReview(){
-  const c=counts();
+  const c=rvStats();
   $('rv-queue-num').textContent=c.new+c.learning;
   $('rv-new-num').textContent=c.new;
   $('rv-learn-num').textContent=c.learning;
@@ -5389,9 +5400,14 @@ function renderReview(){
     if(reviewFilter===el.dataset.rf) return;
     reviewFilter=el.dataset.rf; reviewQueueBuild(); renderReview();
   }));
-  if(reviewQueue.length===0) reviewQueueBuild();
+  if(!reviewQueueReady) reviewQueueBuild();
   if(!reviewQueue.length){
     $('rv-progress').style.width='100%';
+    if(reviewQ.trim()){
+      /* 搜索无匹配：明确提示，不显示"复习完成" */
+      $('rv-body').innerHTML='<div class="donebox" style="margin:16px auto;max-width:460px;"><div class="t">'+t('rv_no_match')+'「'+esc(reviewQ.trim())+'」</div></div>';
+      return;
+    }
     if(reviewFilter!=='all'){
       /* 筛选状态下无词：显示对应空提示，不显示"复习完成" */
       $('rv-body').innerHTML='<div class="donebox" style="margin:16px auto;max-width:460px;"><div class="t">'+t(reviewFilter==='new'?'rv_empty_new':reviewFilter==='learning'?'rv_empty_learning':'rv_empty_mastered')+'</div></div>';
@@ -5509,6 +5525,7 @@ async function markReview(m){
 /* ===== 「认识」前的中文释义验证 ===== */
 let __vmResolve=null;
 function vmOpen(card){
+  vmStopRecognition(); /* 每个词打开弹窗时清理，保证麦克风始终可用 */
   $('vm-title').textContent=t('vm_title');
   $('vm-msg').textContent=t('vm_msg1')+card.word+t('vm_msg2');
   $('vm-input').value=''; $('vm-input').placeholder=t('vm_ph');
@@ -5541,8 +5558,16 @@ function answerHit(card, input){
 }
 /* 认识前释义验证：中文语音输入（交互与记录页语音录入一致：覆盖层 + 实时识别 + 可编辑 + 确认/取消） */
 let vmRecognition=null;
+function vmStopRecognition(){
+  if(vmRecognition){
+    const r=vmRecognition;
+    vmRecognition=null;
+    try{ r.abort(); }catch(e){}
+    try{ r.stop(); }catch(e){}
+  }
+}
 $('vm-mic').addEventListener('click',()=>{
-  if(vmRecognition) return;
+  vmStopRecognition(); /* 先清理可能残留的旧实例，确保下一个词也能正常使用 */
   if(isWeChat()){ toast(t('voice_wechat')); return; }
   if(!voiceSupported()){ toast(t('voice_unsupported2')); return; }
   const card=reviewQueue[reviewIdx];
@@ -5578,19 +5603,19 @@ $('vm-mic').addEventListener('click',()=>{
   vmRecognition.onend=()=>{ $('vmv-mic-icon').classList.remove('live'); vmRecognition=null; };
   try{ vmRecognition.start(); }catch(err){ $('vmv-mic-icon').classList.remove('live'); vmRecognition=null; $('vmv-live').textContent=t('voice_start_fail'); }
 });
-$('vmv-cancel').addEventListener('click',()=>{ if(vmRecognition) try{vmRecognition.stop();}catch(e){} $('vm-voice-overlay').classList.remove('show'); });
+$('vmv-cancel').addEventListener('click',()=>{ vmStopRecognition(); $('vm-voice-overlay').classList.remove('show'); });
 $('vmv-confirm').addEventListener('click',()=>{
   const v=$('vmv-input').value.trim();
+  vmStopRecognition();
   $('vm-voice-overlay').classList.remove('show');
-  if(vmRecognition) try{ vmRecognition.stop(); }catch(e){}
   if(v){ $('vm-input').value=v; $('vm-input').focus(); }
 });
 $('vm-voice-overlay').addEventListener('click',e=>{
-  if(e.target===$('vm-voice-overlay')){ if(vmRecognition) try{vmRecognition.stop();}catch(e){} $('vm-voice-overlay').classList.remove('show'); }
+  if(e.target===$('vm-voice-overlay')){ vmStopRecognition(); $('vm-voice-overlay').classList.remove('show'); }
 });
 $('vmv-input').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('vmv-confirm').click(); } });
 $('vm-ok').addEventListener('click',()=>{
-  if(vmRecognition) try{ vmRecognition.stop(); }catch(e){}
+  vmStopRecognition();
   const card=reviewQueue[reviewIdx];
   if(!card) return;
   if(!meaningKeywords(card).length){ vmClose(true); return; } /* 无释义：直接通过 */
