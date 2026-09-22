@@ -31,6 +31,7 @@ header.appbar{position:sticky;top:0;z-index:20;background:rgba(244,245,247,.92);
 .appbar .stats{font-size:12px;color:var(--text2);}
 .appbar .langbtn{margin-left:auto;border:1px solid var(--border);background:#fff;color:var(--text);font-size:12px;font-weight:600;border-radius:14px;padding:3px 10px;cursor:pointer;flex:none;line-height:1.5;}
 .appbar .langbtn:hover{border-color:var(--st-mastered);color:var(--st-mastered);}
+#app-ver{font-size:10.5px;font-weight:600;color:var(--text3);border:1px solid var(--border);border-radius:99px;padding:1px 7px;margin-left:8px;vertical-align:3px;flex:0 0 auto;}
 .appbar .stats b{color:var(--text);font-weight:600;}
 .stats .dot{color:var(--st-new);}
 
@@ -65,12 +66,74 @@ header.appbar{position:sticky;top:0;z-index:20;background:rgba(244,245,247,.92);
 .chip:hover{border-color:var(--text3);background:#F6F7F9;}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff;}
 .chip.on:hover{filter:brightness(1.08);}
+.chip.due-chip{color:#9A6B1F;border-color:#F5D9A8;background:#FFF7E6;}
+.chip.due-chip:hover{border-color:#E5BE7D;background:#FFEFD2;}
+.chip.due-chip.on{background:#D98E04;border-color:#D98E04;color:#fff;}
+.chip.grad-chip{color:#0E8A5F;border-color:#B7E4D0;background:#E6F7F0;}
+.chip.grad-chip:hover{border-color:#8FD0B2;background:#D2F2E3;}
+.chip.grad-chip.on{background:#0E8A5F;border-color:#0E8A5F;color:#fff;}
 .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid;font-weight:600;flex:0 0 auto;}
 .badge.new{color:var(--st-new);border-color:var(--st-new-bd);background:var(--st-new-bg);}
 .badge.learning{color:var(--st-learning);border-color:var(--st-learning-bd);background:var(--st-learning-bg);}
 .badge.mastered{color:var(--st-mastered);border-color:var(--st-mastered-bd);background:var(--st-mastered-bg);}
 .badge.pending{color:#7C3AED;border-color:#C4B5FD;background:#F5F3FF;}
 .badge.wrong{color:var(--danger);border-color:var(--danger-bd);background:var(--danger-bg);}
+.badge.ipabad{color:#fff;border-color:#DC2626;background:#EF4444;}
+.badge.due{color:#9A6B1F;border-color:#F5D9A8;background:#FFF7E6;}
+.badge.due.mini,.badge.mastered.mini{font-size:10px;padding:1px 6px;border-radius:8px;margin:0 2px;vertical-align:1px;}
+.badge.grad{color:#0E8A5F;border-color:#B7E4D0;background:#E6F7F0;}
+#cd-grad{color:#0E8A5F;border-color:#B7E4D0;background:#E6F7F0;font-weight:600;}
+#cd-grad.grad-on{color:#fff;border-color:#0E8A5F;background:#0E8A5F;}
+.ipawarn{font-size:12px;color:var(--danger);margin-top:8px;line-height:1.5;}
+.rvdaily{margin:10px 14px 0;border-radius:12px;background:var(--card);border:1px solid var(--border);overflow:hidden;}
+.rvdaily-head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 13px;background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text);text-align:left;}
+.rvdaily-head .arr{transition:.2s;color:var(--text3);font-size:11px;display:inline-block;}
+.rvdaily.open .arr{transform:rotate(180deg);}
+.rvdaily-body{padding:0 13px 11px;display:none;}
+.rvdaily.open .rvdaily-body{display:block;}
+.rvdue{margin-top:9px;padding:8px 11px;border-radius:10px;background:#FFF7E6;border:1px solid #F5D9A8;color:#9A6B1F;font-size:12.5px;line-height:1.55;}
+.rvdaily-top{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px;color:var(--text);}
+.rvdaily-top .streak{font-size:11.5px;color:#D98E04;background:#FFF7E6;border:1px solid #F5D9A8;padding:2px 9px;border-radius:99px;font-weight:600;}
+.daily-tags{display:flex;gap:8px;margin-top:10px;width:100%;}
+.dtag{flex:1;text-align:center;background:color-mix(in srgb,var(--c) 9%,#fff);border:1px solid color-mix(in srgb,var(--c) 28%,#fff);border-radius:12px;padding:10px 2px 8px;min-width:0;box-shadow:0 1px 2px rgba(15,23,42,.04);}
+.dtag b{display:block;font-size:19px;font-weight:800;color:var(--c);line-height:1.2;letter-spacing:.2px;}
+.dtag i{font-style:normal;font-size:10.5px;color:#64748B;white-space:nowrap;display:block;margin-top:2px;}
+.rvdaily-bar.today span{color:var(--accent);font-weight:600;}
+.streakbtn{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;color:#D98E04;background:#FFF7E6;border:1px solid #F5D9A8;padding:3px 10px;border-radius:99px;font-weight:600;cursor:pointer;white-space:nowrap;flex:0 0 auto;}
+.streakbtn:hover{filter:brightness(1.05);}
+.daily-cards{display:flex;gap:10px;margin:12px 14px 0;}
+.daily-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 6px;text-align:center;}
+.daily-card b{display:block;font-size:22px;color:var(--text);line-height:1.25;}
+.daily-card span{font-size:11.5px;color:var(--text2);}
+.daily-card.d-add b{color:var(--st-new);}
+.daily-card.d-rev b{color:var(--st-learning);}
+.daily-card.d-mst b{color:var(--st-mastered);}
+.daily-sec{margin:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0 0 6px;overflow:hidden;}
+.daily-sec h3{margin:0 0 12px;font-size:13px;color:var(--text);display:flex;justify-content:space-between;align-items:center;}
+.daily-sec h3 .ds-sub{font-size:11px;color:var(--text3);font-weight:400;}
+.streak-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:#D98E04;background:#FFF7E6;border:1px solid #F5D9A8;padding:2px 9px;border-radius:99px;font-weight:600;white-space:nowrap;}
+.d30list{display:flex;flex-direction:column;max-height:40vh;overflow-y:auto;}
+.d30head,.d30row{display:grid;grid-template-columns:1.15fr repeat(7,1fr);gap:4px;align-items:center;}
+.d30head{font-size:11px;font-weight:600;color:#64748B;padding:8px 12px;background:#F8FAFC;border-bottom:1px solid var(--border);text-align:center;}
+.d30head span:first-child{text-align:left;}
+.d30head .hN{color:#0891B2;} .d30head .h0{color:#0E9F6E;} .d30head .h1{color:#2563EB;} .d30head .h2{color:#7C3AED;} .d30head .h3{color:#D97706;} .d30head .h4{color:#059669;} .d30head .hT{color:#334155;}
+.d30head .hT small{display:block;font-size:9px;font-weight:400;color:#94A3B8;line-height:1.1;}
+.d30row{padding:9px 12px;border-bottom:1px solid #F1F5F9;font-size:12.5px;}
+.d30row:last-child{border-bottom:none;}
+.d30row .dt{color:var(--text);display:flex;align-items:center;gap:4px;font-weight:600;overflow:hidden;white-space:nowrap;}
+.d30row .dt small{color:var(--text3);margin-left:2px;font-size:11px;font-weight:400;}
+.d30row .dt .flame{color:#D98E04;font-size:11px;margin-left:auto;}
+.d30row .dv{text-align:center;font-weight:700;font-size:13px;color:#CBD5E1;}
+.d30row .dv.cN{color:#0891B2;}
+.d30row .dv.c0{color:#0E9F6E;} .d30row .dv.c1{color:#2563EB;} .d30row .dv.c2{color:#7C3AED;} .d30row .dv.c3{color:#D97706;} .d30row .dv.c4{color:#059669;} .d30row .dv.cT{color:#334155;}
+.d30row.on{background:#F0F7FF;border-left:3px solid var(--accent);padding-left:9px;}
+.d30row.on .dt{color:var(--accent);}
+.daily-sec{border-radius:14px;overflow:hidden;}
+.daily-sec h3{padding:14px 14px 0;margin:0 0 10px;font-size:13px;color:var(--text);display:flex;justify-content:space-between;align-items:center;}
+.daily-sec h3 .ds-sub{font-size:11px;color:var(--text3);font-weight:400;}
+.cdstats{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--text2);}
+.cdstats span{white-space:nowrap;}
+.dstat{display:block;font-size:11px;color:var(--text3);margin-top:2px;}
 .empty{padding:46px 20px;text-align:center;color:var(--text3);font-size:13.5px;}
 .empty .ic{font-size:34px;margin-bottom:10px;display:block;}
 .empty .sub{font-size:12px;color:var(--text3);margin-top:6px;}
@@ -143,6 +206,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 .mark.no{background:var(--danger-bg);border-color:var(--danger-bd);color:var(--danger);}
 .mark.yes{background:var(--st-mastered-bg);border-color:var(--st-mastered-bd);color:var(--st-mastered);}
 .mark.next{background:var(--accent-weak);border-color:var(--accent-border);color:var(--accent);}
+.mark.grad{background:var(--grad-bg,#E6F7F0);border-color:var(--grad-bd,#B7E4D0);color:var(--grad,#0E8A5F);}
 .reviewtip{margin:8px auto 0;max-width:460px;text-align:center;font-size:11.5px;color:var(--text3);}
 .donebox{max-width:460px;margin:0 auto;width:100%;text-align:center;padding:40px 20px;background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);}
 .donebox .t{font-size:19px;font-weight:700;margin-top:10px;}
@@ -279,8 +343,8 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 <div id="app">
   <header class="appbar">
     <div class="row">
-      <h1 id="app-title" data-i18n="app_title">SAT 生词本</h1>
-      <span class="stats"><span data-i18n="stat_lib">词库</span> <b id="st-total">0</b> · <span data-i18n="stat_queue">待复习</span> <b id="st-queue">0</b> · <span data-i18n="stat_mastered">已记住</span> <b id="st-mastered">0</b></span>
+      <h1 id="app-title" data-i18n="app_title">SAT 生词本</h1><span id="app-ver" title="版本号">v2.4</span>
+      <span class="stats"><span data-i18n="stat_lib">词库</span> <b id="st-total">0</b> · <span data-i18n="stat_queue">待复习</span> <b id="st-queue">0</b> · <span data-i18n="stat_mastered">已认识</span> <b id="st-mastered">0</b></span>
       <button id="lang-switch" class="langbtn" title="切换语言" aria-label="切换语言">EN</button>
     </div>
   </header>
@@ -328,6 +392,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
             <button class="mi-item" data-btn="btn-undo-import" id="mi-undo-import" data-i18n="mi_undo">撤回上次导入</button>
             <button class="mi-item danger" data-btn="btn-clear" data-i18n="mi_clear">清空生词库</button>
             <button class="mi-item" data-btn="btn-builtin" id="mi-builtin" data-i18n="mi_builtin">管理内置词库</button>
+            <button class="mi-item" data-btn="btn-revint" data-i18n="rev_int">复习间隔设置</button>
             <button class="mi-item" data-btn="btn-ai" data-i18n="ai_config">大模型API配置</button>
           </div>
         </div>
@@ -376,11 +441,23 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
         <input id="rv-search" class="input rv-search" type="text" placeholder="搜索（#标签）" autocomplete="off" spellcheck="false" data-i18n-ph="rv_search_ph">
       </div>
       <div class="cardbox progresscard">
-        <div style="font-size:12.5px;color:var(--text2);"><span data-i18n="rv_queue">今日复习队列</span> <b id="rv-queue-num" style="color:var(--text);">0</b> <span data-i18n="builtin_word">词</span> · <span data-i18n="rv_new">待学习</span> <b id="rv-new-num" style="color:var(--st-new);">0</b> · <span data-i18n="rv_learning">学习中</span> <b id="rv-learn-num" style="color:var(--st-learning);">0</b></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--text2);"><span><span data-i18n="rv_queue">今日复习队列</span> <b id="rv-queue-num" style="color:var(--text);">0</b> <span data-i18n="builtin_word">词</span> · <span data-i18n="rv_new">待学习</span> <b id="rv-new-num" style="color:var(--st-new);">0</b> · <span data-i18n="rv_learning">学习中</span> <b id="rv-learn-num" style="color:var(--st-learning);">0</b> · <span data-i18n="rv_round2">再次复习</span> <b id="rv-due-num" style="color:var(--st-due,#9A6B1F);">0</b></span><button id="rv-streak-btn" class="streakbtn" title="查看今日统计详情">🔥 <span data-i18n="dl_streak">连续学习</span> <b>0</b> <span data-i18n="dl_days"> 天</span></button></div>
+        <div id="rv-due-bar" class="rvdue" style="display:none;"></div>
         <div class="progressbar"><i id="rv-progress" style="width:0%"></i></div>
       </div>
+      <div class="rvdaily" id="rv-daily"></div>
       <div class="chips" id="rv-chips"></div>
       <div id="rv-body"></div>
+    </section>
+
+    <!-- ===== 视图：今日统计详情 ===== -->
+    <section id="view-daily" class="view">
+      <div class="detailhead">
+        <button id="daily-back" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="back">返回</span></button>
+        <span class="t" data-i18n="dl_stat">今日统计</span>
+        <span></span>
+      </div>
+      <div id="daily-body"></div>
     </section>
 
     <!-- ===== 视图：词卡详情 ===== -->
@@ -392,6 +469,8 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
       <div class="dword">
         <div class="w" id="cd-word"></div>
         <div class="ipa" id="cd-ipa"></div>
+        <div class="cdstats" id="cd-stats" style="display:none;"></div>
+        <button id="cd-grad" class="btn sm ghost" style="display:none;margin-top:10px;"></button>
       </div>
       <div class="field"><div class="fl"><span data-i18n="f_meaning">词义</span> <span class="ai-tag" data-i18n="f_pos_hint">不同词性可对应不同释义</span></div>
         <div id="defs-list"></div>
@@ -554,6 +633,20 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
   </div>
 </div>
 
+<!-- ===== 复习间隔设置弹层 ===== -->
+<div id="revint-modal" class="modal">
+  <div class="modalbox">
+    <div class="mt" data-i18n="rev_int_title">已认识复习间隔</div>
+    <div class="ms" data-i18n="rev_int_help">已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。</div>
+    <label class="fl" style="margin-top:16px;font-size:13px;" data-i18n="rev_int_label">间隔天数</label>
+    <input id="revint-input" class="input mfield" type="number" min="1" max="90" step="1" />
+    <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end;">
+      <button id="revint-cancel" class="btn sm ghost" data-i18n="cancel">取消</button>
+      <button id="revint-save" class="btn sm primary" data-i18n="ai_save">保存</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== 豆包 AI 配置弹层 ===== -->
 <div id="ai-modal" class="modal">
   <div class="modalbox">
@@ -588,13 +681,19 @@ function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(
 let toastTimer=null;
 function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
 function ipaWrap(s){ return s ? ('/'+String(s).replace(/^\/+|\/+$/g,'')+'/') : ''; }
+/* 音标异常检测：源数据里 IPA 特殊符号丢失时通常残留 ? 或 ？ */
+function ipaBroken(c){
+  const s=String((c&&(c.phonetic_us||c.phonetic_uk))||'');
+  if(!s) return false;
+  return /[?？]/.test(s);
+}
 
 /* ===== 界面语言（中 / EN）===== */
 const LANG_KEY='sv_lang';
 let LANG=localStorage.getItem(LANG_KEY)==='en'?'en':'zh';
 const I18N={
   zh:{
-    app_title:'SAT 生词本', stat_lib:'词库', stat_queue:'待复习', stat_mastered:'已记住',
+    app_title:'SAT 生词本', stat_lib:'词库', stat_queue:'待复习', stat_mastered:'已认识',
     tab_record:'记录', tab_library:'词库', tab_review:'复习',
     quick_add:'快速记录', word_ph:'输入英文单词，如 circumvent', voice_title:'语音录入',
     save_lookup:'查询并保存', import_row:'导入生词（CSV / TXT / Word / PDF）', recent:'最近记录',
@@ -605,7 +704,7 @@ const I18N={
     builtin_title:'内置词库', builtin_word:'词', builtin_sub:'通过「导入内置词」导入的词',
     builtin_import:'导入内置词', builtin_clear:'全部删除', builtin_restore:'恢复默认', builtin_search_ph:'搜索单词、释义或标签（#标签）', builtin_tag_ph:'导入标签（可选，如：维他机考）',
     builtin_import_title:'导入内置词', builtin_import_fmt:'每行一个词：单词、单词,释义 或 单词,词性,释义，分隔符支持英文/中文逗号、Tab；重复词自动跳过。', builtin_import_fmt2:'导入的单词将进入内置词库，录入时自动补全释义', builtin_import_fmts:'支持 CSV / TXT / Word / Excel / PDF', t_parsing:'解析中…', builtin_tag_confirm:'未设置导入标签。这批词将不带标签，确定直接导入吗？（选「取消」可先填写标签）', builtin_tag_hint:'请先在上方填写导入标签，再重新选择文件',
-    back:'返回', review:'复习', rv_queue:'今日复习队列', rv_new:'待学习', rv_learning:'学习中', rv_mastered:'已记住',
+    back:'返回', review:'复习', rv_queue:'今日复习队列', rv_new:'待学习', rv_learning:'学习中', rv_mastered:'已认识',
     card_title:'词卡详情 / 编辑', f_meaning:'词义', f_pos_hint:'不同词性可对应不同释义',
     add_meaning:'+ 添加词义', f_example:'英文释义 / 例句', f_example_short:'例句', f_root:'词根词缀', local_rules:'本地规则 · 可编辑', root_simple:'单纯词，无常见词根词缀，建议整体记忆',
     regen:'重新生成', f_memo:'记忆方法', another:'换一条',
@@ -613,10 +712,10 @@ const I18N={
     ai_memo_copy_fail:'复制失败：Prompt 已填入输入框，请全选手动复制到豆包',
     ai_config:'大模型API配置', ai_title:'大模型API配置', ai_help:'填入你在火山方舟申请的 API Key 后，「豆包生成」将一键直连豆包自动生成记忆法。Key 仅保存在本机浏览器，不会上传、不会写入代码。', ai_key:'API Key', ai_model:'模型 ID', ai_model_help:'需先在方舟控制台「开通管理」开通对应模型（如 doubao-seed-2-1-turbo）；新用户有免费推理额度。', ai_clear:'清除', ai_save:'保存', ai_test:'测试连接', ai_saved:'大模型API配置已保存', ai_cleared:'大模型API配置已清除', ai_testing:'测试中…', ai_generating:'豆包生成中…', ai_ok:'豆包已生成记忆法，点「保存修改」即可', ai_empty:'豆包返回为空，请重试', ai_fail:'豆包生成失败', rv_ai_saved:'已生成并保存到词卡', rv_no_memo:'（暂无记忆法）', ai_hint:'当前模型实测较慢，推荐切换到 Doubao-Seed-2.0 Mini（约 2 秒）',
     del_card:'删除词卡', save_changes:'保存修改', footnote:'释义/音标来自免费词典接口与内置词库 · 词根助记：本地规则 + 豆包生成 · 数据仅存于本机浏览器',
-    st_new:'待学习', st_learning:'学习中', st_mastered:'已记住',
+    st_new:'待学习', st_learning:'学习中', st_mastered:'已认识',
     voice_title2:'语音录入', voice_sub:'说出一个英文单词，如 "circumvent"', voice_result:'识别结果（可编辑修正）', cancel:'取消', ok:'确定', confirm_add:'确认录入',
     import_title:'导入生词', import_sub:'支持 CSV / TXT / Word / PDF。', import_sub2:'CSV / TXT 每行一个词：',
-    import_fmt:'单词、单词,释义 或 单词,词性,释义，分隔符支持英文/中文逗号、Tab；Word / PDF 自动提取每行单词与释义。重复词自动跳过。',
+    import_fmt:'每行一个词：单词、单词,释义 或 单词,词性,释义；也支持带表头的 CSV（表头：单词,音标,释义,例句）。分隔符支持英文/中文逗号、Tab；Word / PDF 自动提取。重复词自动跳过。',
     import_drop:'点击选择文件，或拖入文件', import_example:'格式示例：abate, v., 减弱；circumvent, v., 规避',
     import_example2:'Word / PDF 自动提取每行单词与释义', close:'关闭',
     status_pending:'待补全', not_in_builtin:'不在内置词库中', meaning_pending:'释义待补充',
@@ -629,19 +728,21 @@ const I18N={
     ms_title:'保存文件', ms_msg:'浏览器拦截了自动下载，请点击下方按钮手动保存：', ms_save:'保存文件',
     t_get_phon:'获取音标', t_getting_phon:'获取中…', t_phon_ok:'✓ 已获取音标', t_phon_fail:'获取失败，请检查网络后重试', t_ai_auto:'✓ 已自动补全词义与例句',
     t_saved_ok:'已保存', t_deleted:'已删除', t_need_word:'请输入英文单词', t_keep_one:'至少保留一行词义',
-    t_review_done:'今日单词已复习完', t_review_stats:'已记住', t_relearn:'重新学习已记住词', t_view_mastered:'查看已记住词',
-    t_re_added:'已重新加入复习队列', t_re_fuzzy:'已标记为模糊，稍后复习', t_re_yes:'已记住', t_re_no:'还不认识',
-    vm_title:'确认掌握', vm_msg1:'请输入「', vm_msg2:'」的中文意思', vm_ph:'输入中文意思', vm_wrong:'回答不正确，再想想', vm_pass:'✓ 答对了，已记住', vm_nomeaning:'该词暂无释义，无法验证，将直接标记为已记住', vmv_title:'语音输入中文意思', vmv_sub:'说出该单词的中文意思',
+    t_review_done:'今日单词已复习完', t_review_stats:'已认识', t_relearn:'重新学习已认识词', t_view_mastered:'查看已认识词',
+    t_re_added:'已重新加入复习队列', t_re_fuzzy:'已标记为模糊，稍后复习', t_re_yes:'已认识', t_re_no:'还不认识',
+    vm_title:'确认掌握', vm_msg1:'请输入「', vm_msg2:'」的中文意思', vm_ph:'输入中文意思', vm_wrong:'回答不正确，再想想', vm_pass:'✓ 答对了，已认识', vm_nomeaning:'该词暂无释义，无法验证，将直接标记为已认识', vmv_title:'语音输入中文意思', vmv_sub:'说出该单词的中文意思',
     t_lookup_fail:'离线/查询失败，可手动填写', t_bg_done:'✓ 在线释义补全完成', t_bg_doing:'后台在线补全释义中：',
     t_regenerate:'已重新生成', t_mnemonic_new:'已生成新的记忆方法',
     t_builtin_import_ok:'内置词库导入完成', t_builtin_clear_ok:'已清空内置词库', t_builtin_restore_ok:'已恢复默认词库',
     t_builtin_search:'没有匹配的词', t_builtin_empty:'内置词库为空',
     t_pos_hint:'词性，如 v.', t_zh_hint:'该词性对应的中文释义', t_del_row:'删除此行',
-    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音',
+    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音', ipa_bad:'音标待修复', ipa_bad_hint:'音标含异常字符（可能来自文件转换），点击下方按钮用豆包重新生成', t_fix_phon:'用豆包修复音标', ipa_auto_nokey1:'检测到 ', ipa_auto_nokey2:' 个异常音标；在「设置 → 大模型 API 配置」填入 Key 后，导入时可自动修复', ipa_auto_prog:'\n正在用豆包批量修复音标… ', ipa_auto_ok1:'已自动修复 ', ipa_auto_ok2:' 个音标', rev_int:'复习间隔设置', rev_int_title:'已认识复习间隔', rev_int_help:'已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。', rev_int_label:'间隔天数', rev_int_saved:'已认识复习间隔已保存', rev_int_day:' 天', rv_due1:'有 ', rv_due2:' 个已认识的词需复习，已自动加入复习队列（点「认识」确认后重新计时）', due_badge:'需复习', due_hint:'已认识需复习，已自动加入复习队列；复习时点「认识」确认后重新计时', grad_badge:'熟悉', grad_hint:'已标记熟悉：不再自动安排复习，可在详情页取消', cd_grad:'标记为熟悉', cd_ungrad:'取消熟悉', grad_ok:'已标记为熟悉，不再自动安排复习', ungrad_ok:'已取消熟悉，将按间隔继续复习', rv_round2:'再次复习', rv_grad:'已熟悉', known_due:'认识（需复习）', rv_empty_due:'暂无需复习的已认识词', rv_empty_grad:'暂无已熟悉的词', dl_stat:'今日统计', dl_streak:'连续学习', dl_days:' 天', dl_week:['日','一','二','三','四','五','六'], dl_30:'近30天每日统计', dl_today:'今天', dl_date:'日期', dl_new:'新增', dl_total:'变化总数', dl_total_note:'不含新增',
+ ago_now:'刚刚', ago_min:' 分钟前', ago_hour:' 小时前', ago_day:' 天前',
     t_flip:'翻面查看', t_loading:'导入中…', t_done:'完成', page_of:' 页 · 共 ', words2:' 词',
     st_all:'全部', builtin_extra:'为你导入', builtin_more:'，另有 ', builtin_add:'收录', builtin_added:'已收录',
-    wrong_times:'未记住', times_word:'次',
-    rv_empty_new:'暂无待学习的单词，去记录页添加吧', rv_empty_learning:'暂无学习中的单词，复习后自动进入该状态', rv_empty_mastered:'还没有已记住的单词，坚持复习就会记住', rv_no_match:'没有匹配的单词：',
+    wrong_times:'未记住', learn_times:'已学习 ', times_word:'次',
+    mst_cnt:'已认识 ', mst_hint:'累计确认认识的次数', st_rev_cnt:'复习 ', learn_cnt:'已学习 ', st_rev_last:'最后复习 ', st_mastered_at:'记住于 ',
+    rv_empty_new:'暂无待学习的单词，去记录页添加吧', rv_empty_learning:'暂无学习中的单词，复习后自动进入该状态', rv_empty_mastered:'还没有已认识的单词，坚持复习就会记住', rv_no_match:'没有匹配的单词：',
     del:'删除', del_from_builtin:'从内置词库删除', builtin_del_ok:'已从内置词库删除 ',
     builtin_del_c1:'确定从内置词库删除「', builtin_del_c2:'」？删除后录入该词将不再自动补全释义。',
     prev:'上一页', next:'下一页',
@@ -658,10 +759,10 @@ const I18N={
     review_tip2:'认识 → 答对释义后移出队列；下一个 → 继续学习 · 点击单词可编辑',
     rv_pending_fuzzy:'已标记「模糊」：确认点「下一个」，或答对释义点「认识」',
     rv_pending_no:'已标记「不认识」：确认点「下一个」，或答对释义点「认识」',
-    reset_c:'将全部「已记住」的词重置回学习中？', regen_ok:'已重新生成，可继续编辑',
+    reset_c:'将全部「已认识」的词重置回学习中？', regen_ok:'已重新生成，可继续编辑',
     del_confirm1:'删除「', del_confirm2:'」？',
     voice_wechat:'微信内置浏览器无法录音。请点右上角「···」→「在 Safari 中打开」；安卓点「在浏览器中打开」后即可使用',
-    voice_unsupported2:'当前环境不支持语音识别（需 Chrome/Edge/Safari 17+ 且 HTTPS）。可改用系统输入法自带语音，或在电脑端 Chrome 使用', voice_listening:'正在识别：',
+    voice_unsupported2:'当前环境不支持语音识别（需 Chrome/Edge/Safari 17+ 且 HTTPS）。可改用系统输入法自带语音，或在电脑端 Chrome 使用', voice_fallback:'当前浏览器不支持语音识别，已聚焦输入框，可使用输入法自带的语音键说话', voice_listening:'正在识别：',
     voice_perm:'未获得麦克风权限', voice_nospeech:'未听到声音，请重试', voice_audiocap:'未检测到麦克风',
     voice_network:'语音识别服务不可用（部分浏览器依赖境外服务）。可改用系统输入法语音输入', voice_aborted:'已取消', voice_fail1:'识别失败：',
     voice_start_fail:'无法启动语音识别（语音识别需在 HTTPS 环境下使用），可改用输入法语音输入', voice_empty:'识别为空，请手动输入',
@@ -681,7 +782,7 @@ const I18N={
     auto_backup_saved:'已自动备份当前数据，误清空可随时恢复', auto_backup_bar1:'检测到清空前的自动备份（', auto_backup_bar2:' 个生词', auto_backup_bar3:'）', auto_backup_restore:'一键恢复', auto_backup_ignore:'忽略', auto_backup_confirm:'恢复清空前自动备份？将覆盖当前全部数据（含学习进度）。', auto_backup_ok:'✓ 已从自动备份恢复 ', auto_backup_fail:'自动备份失败，建议手动备份',
   },
   en:{
-    app_title:'SAT Vocab', stat_lib:'Library', stat_queue:'To review', stat_mastered:'Mastered',
+    app_title:'SAT Vocab', stat_lib:'Library', stat_queue:'To review', stat_mastered:'Known',
     tab_record:'Record', tab_library:'Library', tab_review:'Review',
     quick_add:'Quick Add', word_ph:'Enter an English word, e.g. circumvent', voice_title:'Voice input',
     save_lookup:'Look Up & Save', import_row:'Import words (CSV / TXT / Word / PDF)', recent:'Recent',
@@ -692,7 +793,7 @@ const I18N={
     builtin_title:'Built-in words', builtin_word:'words', builtin_sub:'Words imported via "Import built-in words"',
     builtin_import:'Import built-in words', builtin_clear:'Delete all', builtin_restore:'Restore default', builtin_search_ph:'Search word, meaning or tag (#tag)', builtin_tag_ph:'Tag for this import (optional, e.g. Vita SAT)',
     builtin_import_title:'Import built-in words', builtin_import_fmt:'One word per line: word, word,meaning or word,pos,meaning; separators: comma (EN/CN) or Tab; duplicates skipped.', builtin_import_fmt2:'Imported words go into the built-in library and auto-fill meanings on entry.', builtin_import_fmts:'CSV / TXT / Word / Excel / PDF supported', t_parsing:'Parsing…', builtin_tag_confirm:'No tag set. These words will be imported without a tag. Continue? (Cancel to add a tag first)', builtin_tag_hint:'Please fill in the tag above, then choose the file again',
-    back:'Back', review:'Review', rv_queue:'Today\'s review queue', rv_new:'New', rv_learning:'Learning', rv_mastered:'Mastered',
+    back:'Back', review:'Review', rv_queue:'Today\'s review queue', rv_new:'New', rv_learning:'Learning', rv_mastered:'Known',
     card_title:'Card Detail / Edit', f_meaning:'Meanings', f_pos_hint:'different parts of speech may have different meanings',
     add_meaning:'+ Add meaning', f_example:'English definition / example', f_example_short:'Example', f_root:'Root & affixes', local_rules:'local rules · editable', root_simple:'Simple word: no common root/affix; memorize as a whole',
     regen:'Regenerate', f_memo:'Mnemonic', another:'Another one',
@@ -700,10 +801,10 @@ const I18N={
     ai_memo_copy_fail:'Copy failed: prompt filled into the box, select all and copy it to Doubao manually',
     ai_config:'LLM API Setup', ai_title:'LLM API Setup', ai_help:'Fill in your Volcano Ark API Key and "Doubao Generate" will call Doubao directly. The key is stored only in this browser, never uploaded or written into code.', ai_key:'API Key', ai_model:'Model ID', ai_model_help:'Enable the model first in Ark console "开通管理" (e.g. doubao-seed-2-1-turbo); new users get free quota.', ai_clear:'Clear', ai_save:'Save', ai_test:'Test Connection', ai_saved:'LLM API settings saved', ai_cleared:'LLM API settings cleared', ai_testing:'Testing…', ai_generating:'Generating…', ai_ok:'Generated! Click Save to keep it', ai_empty:'Empty response, please retry', ai_fail:'Generation failed', rv_ai_saved:'Saved to the card', rv_no_memo:'(no mnemonic yet)', ai_hint:'Current model is slow; switch to Doubao-Seed-2.0 Mini (~2s)',
     del_card:'Delete card', save_changes:'Save changes', footnote:'Meanings/IPA from free dictionary API & built-in library · roots & mnemonics: local rules + Doubao AI · data stays in your browser',
-    st_new:'New', st_learning:'Learning', st_mastered:'Mastered',
+    st_new:'New', st_learning:'Learning', st_mastered:'Known',
     voice_title2:'Voice input', voice_sub:'Say an English word, e.g. "circumvent"', voice_result:'Recognized (editable)', cancel:'Cancel', ok:'OK', confirm_add:'Confirm',
     import_title:'Import words', import_sub:'Supports CSV / TXT / Word / PDF.', import_sub2:'CSV / TXT: one word per line,',
-    import_fmt:'as word, word,meaning or word,pos,meaning — separators: comma or Tab; Word / PDF auto-extract each line\'s word & meaning. Duplicates are skipped.',
+    import_fmt:'as word, word,meaning or word,pos,meaning; also header CSV (word,ipa,meaning,example). Separators: comma or Tab; Word / PDF auto-extract. Duplicates are skipped.',
     import_drop:'Click to choose a file, or drop one here', import_example:'Text format: abate, v., to lessen; circumvent, v., to get around',
     import_example2:'Word / PDF: word & meaning are extracted automatically', close:'Close',
     status_pending:'Pending', not_in_builtin:'Not in built-in library', meaning_pending:'meaning pending',
@@ -716,19 +817,21 @@ const I18N={
     ms_title:'Save file', ms_msg:'The browser blocked auto-download. Please tap the button below to save:', ms_save:'Save file',
     t_get_phon:'Get phonetics', t_getting_phon:'Fetching…', t_phon_ok:'✓ Phonetics saved', t_phon_fail:'Failed. Check your network and retry', t_ai_auto:'✓ Auto-filled meaning & example',
     t_saved_ok:'Saved', t_deleted:'Deleted', t_need_word:'Please enter an English word', t_keep_one:'Keep at least one meaning row',
-    t_review_done:'All words reviewed for today', t_review_stats:'Mastered', t_relearn:'Re-learn mastered words', t_view_mastered:'View mastered words',
-    t_re_added:'Back in the review queue', t_re_fuzzy:'Marked fuzzy, will appear again', t_re_yes:'Mastered', t_re_no:'Not yet',
-    vm_title:'Confirm mastery', vm_msg1:'Type the Chinese meaning of "', vm_msg2:'"', vm_ph:'Chinese meaning', vm_wrong:'Not quite right, try again', vm_pass:'✓ Correct — mastered', vm_nomeaning:'No meaning available; will be marked as mastered', vmv_title:'Say the Chinese meaning', vmv_sub:'Say the Chinese meaning of the word',
+    t_review_done:'All words reviewed for today', t_review_stats:'Known', t_relearn:'Re-learn mastered words', t_view_mastered:'View mastered words',
+    t_re_added:'Back in the review queue', t_re_fuzzy:'Marked fuzzy, will appear again', t_re_yes:'Known', t_re_no:'Not yet',
+    vm_title:'Confirm mastery', vm_msg1:'Type the Chinese meaning of "', vm_msg2:'"', vm_ph:'Chinese meaning', vm_wrong:'Not quite right, try again', vm_pass:'✓ Correct — known', vm_nomeaning:'No meaning to verify — will mark as known', vmv_title:'Say the Chinese meaning', vmv_sub:'Say the Chinese meaning of the word',
     t_lookup_fail:'Offline / lookup failed, fill in manually', t_bg_done:'✓ Online definitions complete', t_bg_doing:'Fetching online definitions:',
     t_regenerate:'Regenerated', t_mnemonic_new:'New mnemonic generated',
     t_builtin_import_ok:'Built-in library imported', t_builtin_clear_ok:'Built-in library cleared', t_builtin_restore_ok:'Default library restored',
     t_builtin_search:'No matching words', t_builtin_empty:'Built-in library is empty',
     t_pos_hint:'POS, e.g. v.', t_zh_hint:'Chinese meaning for this POS', t_del_row:'Delete this row',
-    t_star_hint:'Not in built-in library; meaning may come from online lookup or manual edit', t_am:'US', t_uk:'UK', speak:'Speak', speak_am:'Speak US', speak_uk:'Speak UK',
+    t_star_hint:'Not in built-in library; meaning may come from online lookup or manual edit', t_am:'US', t_uk:'UK', speak:'Speak', speak_am:'Speak US', speak_uk:'Speak UK', ipa_bad:'Fix IPA', ipa_bad_hint:'IPA contains broken characters (often from file conversion). Tap the button below to regenerate with the LLM', t_fix_phon:'Fix IPA with LLM', ipa_auto_nokey1:'Found ', ipa_auto_nokey2:' broken IPA entries; configure the LLM API key in Settings to auto-fix on import', ipa_auto_prog:'\nFixing IPA with the LLM… ', ipa_auto_ok1:'Auto-fixed ', ipa_auto_ok2:' IPA entries', rev_int:'Review interval', rev_int_title:'Known review interval', rev_int_help:'Known words come back to the review queue automatically when due (Ebbinghaus spaced review). Confirming "Know" resets the timer; tapping "Fuzzy"/"Don\'t know" sends the word back to the learning queue.', rev_int_label:'Interval (days)', rev_int_saved:'Review interval saved', rev_int_day:' day(s)', rv_due1:'', rv_due2:' known word(s) are now due and were added to the review queue (tap "Know" to confirm and restart the timer)', due_badge:'Due', due_hint:'Known word is due; tap "Know" during review to confirm and restart the timer', grad_badge:'Familiar', grad_hint:'Marked familiar: no longer auto-scheduled for review; undo from the card detail', cd_grad:'Mark as familiar', cd_ungrad:'Undo familiar', grad_ok:'Marked as familiar — no longer auto-scheduled', ungrad_ok:'Familiar mark removed — will be reviewed on schedule again', rv_round2:'Review again', rv_grad:'Familiar', known_due:'Known (review)', rv_empty_due:'No due words', rv_empty_grad:'No familiar words', dl_stat:'Daily', dl_streak:'Streak', dl_days:' d', dl_week:['S','M','T','W','T','F','S'], dl_30:'Daily stats · last 30 days', dl_today:'today', dl_date:'Date', dl_new:'New', dl_total:'Total', dl_total_note:'excl. new',
+ ago_now:'just now', ago_min:' min ago', ago_hour:' hr ago', ago_day:' day(s) ago',
     t_flip:'Flip to see answer', t_loading:'Importing…', t_done:'Done', page_of:' pages · ', words2:' words',
     st_all:'All', builtin_extra:'imported by you', builtin_more:', another ', builtin_add:'Add', builtin_added:'Added',
-    wrong_times:'Not yet mastered', times_word:'times',
-    rv_empty_new:'No new words yet — add some on the Record tab', rv_empty_learning:'No learning words — words move here after review', rv_empty_mastered:'No mastered words yet — keep reviewing and you\'ll get there', rv_no_match:'No matching words:',
+    wrong_times:'Not yet mastered', learn_times:'Learned ', times_word:'times',
+    mst_cnt:'Known ', mst_hint:'Total times confirmed known', st_rev_cnt:'Reviewed ', learn_cnt:'Learned ', st_rev_last:'Last review ', st_mastered_at:'Mastered ',
+    rv_empty_new:'No new words yet — add some on the Record tab', rv_empty_learning:'No learning words — words move here after review', rv_empty_mastered:'No known words yet — keep reviewing and you\'ll get there', rv_no_match:'No matching words:',
     del:'Delete', del_from_builtin:'Delete from built-in library', builtin_del_ok:'Deleted from built-in library: ',
     builtin_del_c1:'Delete "', builtin_del_c2:'" from the built-in library? Its meaning will no longer auto-fill when added.',
     prev:'Prev', next:'Next',
@@ -745,10 +848,10 @@ const I18N={
     review_tip2:'Know it → leave the queue after a correct answer; Next → keep studying · Tap the word to edit',
     rv_pending_fuzzy:'Marked "Fuzzy": tap Next to confirm, or answer the meaning to tap Know it',
     rv_pending_no:'Marked "Don\'t know": tap Next to confirm, or answer the meaning to tap Know it',
-    reset_c:'Reset all "Mastered" words back to Learning?', regen_ok:'Regenerated, feel free to edit',
+    reset_c:'Reset all "Known" words back to Learning?', regen_ok:'Regenerated, feel free to edit',
     del_confirm1:'Delete "', del_confirm2:'"?',
     voice_wechat:'Recording is blocked inside WeChat. Tap “···” top-right → “Open in Safari” (iOS) or “Open in browser” (Android)',
-    voice_unsupported2:'Speech recognition unavailable here (needs Chrome/Edge/Safari 17+ over HTTPS). Use your keyboard voice input, or Chrome on desktop', voice_listening:'Listening: ',
+    voice_unsupported2:'Speech recognition unavailable here (needs Chrome/Edge/Safari 17+ over HTTPS). Use your keyboard voice input, or Chrome on desktop', voice_fallback:'Speech recognition unavailable. Input focused — use your keyboard voice key', voice_listening:'Listening: ',
     voice_perm:'Microphone permission denied', voice_nospeech:'No speech heard, try again', voice_audiocap:'No microphone detected',
     voice_network:'Speech recognition service unavailable (some browsers rely on overseas services). Use keyboard voice input instead', voice_aborted:'Cancelled', voice_fail1:'Recognition failed: ',
     voice_start_fail:'Could not start speech recognition (HTTPS required). Use keyboard voice input instead', voice_empty:'Nothing recognized, type it manually',
@@ -4679,7 +4782,7 @@ function makeCard(word, source){
     tag:(b&&b.tag)||'',
     root:'', mnemonic:'', example:'', status:'new', source,
     createdAt:now, lastReviewedAt:null, reviewCount:0, wrongCount:0,
-    pending:false, pendingReason:'' };
+    masteredCount:0, masteredAt:0, graduated:false, graduatedAt:0, pending:false, pendingReason:'' };
 }
 /* 卡片标签：优先卡片自带，缺失时回退内置词库标签（存量词无需重新导入即可显示） */
 function tagOf(c){
@@ -4790,6 +4893,7 @@ async function addWord(word, source){
   const card=makeCard(word,source||'manual');
   await DB.add(card);
   enrichCard(card,true);
+  bumpLog('addNew'); /* 当日新增（录入+导入） */
   return {ok:true,msg:t('t_saved')+' '+word,card};
 }
 
@@ -4811,24 +4915,113 @@ async function refresh(){
   await renderAutoBackupBar();
 }
 function counts(){
-  const c={new:0,learning:0,mastered:0};
-  allCards.forEach(x=>{ if(c[x.status]!=null) c[x.status]++; });
+  const c={new:0,learning:0,mastered:0,due:0};
+  allCards.forEach(x=>{ if(c[x.status]!=null) c[x.status]++; if(x.status==='mastered'&&isDue(x)) c.due++; });
   return c;
 }
-/* 复习队列构建规则（refresh 与复习页共用）；filter: all / new / learning */
+/* 已记住复习间隔（天，默认 3）：到期后自动回到复习队列（艾宾浩斯间隔复习） */
+function revIntervalDays(){ return Math.max(1,Math.min(90,parseInt(localStorage.getItem('sv_rev_interval')||'3',10)||3)); }
+/* 计时起点：记住时间 → 最后复习 → 创建时间（兼容无记住时间记录的存量词） */
+function isDue(c){ if(c.status!=='mastered'||c.graduated) return false; const base=c.masteredAt||c.lastReviewedAt||c.createdAt; return !!base&&(Date.now()-base)>=revIntervalDays()*86400000; }
+/* 复习队列构建规则（refresh 与复习页共用）；filter: all / new / learning / mastered / due(二轮) / graduated(已熟悉) */
 function buildQueue(cards, filter){
   filter=filter||'all';
   let base;
-  if(filter==='mastered') base=cards.filter(c=>c.status==='mastered');
-  else base=cards.filter(c=>(c.status==='new'||c.status==='learning')&&(filter==='all'||c.status===filter));
+  if(filter==='due') base=cards.filter(c=>isDue(c));                 /* 二轮复习：按间隔到期的已记住词 */
+  else if(filter==='graduated') base=cards.filter(c=>c.graduated);   /* 已熟悉：毕业词，不自动进入下一轮，可手动复习 */
+  else if(filter==='mastered') base=cards.filter(c=>c.status==='mastered');
+  else base=cards.filter(c=>(c.status==='new'||c.status==='learning'||(filter==='all'&&isDue(c)))&&(filter==='all'||c.status===filter));
   return base.sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
 }
-function renderAll(){ __counts=counts(); renderHeader(); renderRecent(); renderLibrary(); renderReview(); }
+function renderAll(){ __counts=counts(); renderHeader(); renderRecent(); renderLibrary(); renderReview(); renderDaily(); }
+/* 每日动作计数（轻量）：学习/复习动作发生时 +1，用于统计「再次学习/再次复习」次数 */
+function dayKeyOf(ts){ const d=new Date(ts||Date.now()); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function bumpLog(kind){
+  try{
+    const k=dayKeyOf();
+    const log=JSON.parse(localStorage.getItem('sv_daycnt')||'{}');
+    log[k]=log[k]||{};
+    log[k][kind]=(log[k][kind]||0)+1;
+    localStorage.setItem('sv_daycnt',JSON.stringify(log));
+  }catch(e){}
+}
+function logOf(k){ try{ return (JSON.parse(localStorage.getItem('sv_daycnt')||'{}'))[k]||{}; }catch(e){ return {}; } }
+/* 当日统计：各状态下点击底部按钮的累加数（ckNew/ckLearn/ckMst/ckDue/ckGrad） */
+function dayField(l,k){ return (l&&l[k]!=null)?l[k]:0; }
+/* 每日统计（6 维度）：今日新增 / 首次学习(待学习减少) / 再次学习(次数) / 首次认识 / 再次复习(次数) / 新增熟悉 */
+function computeDaily(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const t0=today.getTime();
+  const todayKey=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  let todayNew=0, todayReview=0, todayMaster=0, streak=0, start=1;
+  const dayMapStreak={};
+  allCards.forEach(c=>{
+    if(c.createdAt>=t0) todayNew++;
+    if(c.lastReviewedAt&&c.lastReviewedAt>=t0) todayReview++;
+    if(c.masteredAt&&c.masteredAt>=t0) todayMaster++;
+    const act=Math.max(c.lastReviewedAt||0,c.createdAt||0);
+    if(act){ const k=new Date(act); dayMapStreak[k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate()]=(dayMapStreak[k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate()]||0)+1; }
+  });
+  if(dayMapStreak[todayKey]) start=0;
+  for(let i=start;i<3660;i++){
+    const d=new Date(t0-i*86400000), k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    if(dayMapStreak[k]) streak++; else break;
+  }
+  const lg=logOf(todayKey);
+  const days30=[];
+  for(let i=0;i<30;i++){
+    const d=new Date(t0-i*86400000), k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const l=logOf(k);
+    days30.push({date:(d.getMonth()+1)+'/'+d.getDate(), wd:d.getDay(), today:i===0, ts:d.getTime(),
+      add:dayField(l,'addNew'), nL:dayField(l,'ckNew'), inL:dayField(l,'ckLearn'), inM:dayField(l,'ckMst'), inD:dayField(l,'ckDue'), inG:dayField(l,'ckGrad'),
+      total:dayField(l,'ckNew')+dayField(l,'ckLearn')+dayField(l,'ckMst')+dayField(l,'ckDue')+dayField(l,'ckGrad')});
+  }
+  return {streak,days30,todayLog:lg,todayNew,todayReview,todayMaster};
+}
+function renderDaily(){
+  const el=$('rv-daily'); const sbtn=$('rv-streak-btn');
+  const d=computeDaily();
+  if(sbtn) sbtn.innerHTML='🔥 <span>'+t('dl_streak')+'</span> <b>'+d.streak+'</b><span>'+t('dl_days')+'</span>';
+  if(!el) return;
+  const wasOpen=el.classList.contains('open');
+  el.innerHTML='<button class="rvdaily-head" id="rv-daily-toggle"><span>'+t('dl_stat')+'</span><span class="arr">▾</span></button>'
+    +'<div class="rvdaily-body">'+daily5tags()+'</div>';
+  el.classList.toggle('open',wasOpen);
+  $('rv-daily-toggle').addEventListener('click',()=>el.classList.toggle('open'));
+}
+/* 30 天报表行：日期 + 新增 + 5 状态按钮点击数（固定列表格） */
+function d30rowHTML(x){
+  return '<div class="d30row'+(x.today?' on':'')+'"><span class="dt">'+(x.today?t('dl_today'):x.date)+'<small>'+t('dl_week')[x.wd]+'</small>'+(x.today?'<span class="flame">🔥</span>':'')+'</span>'
+    +'<span class="dv cN">'+(x.add||'')+'</span>'
+    +'<span class="dv c0">'+(x.nL||'')+'</span>'
+    +'<span class="dv c1">'+(x.inL||'')+'</span>'
+    +'<span class="dv c2">'+(x.inM||'')+'</span>'
+    +'<span class="dv c3">'+(x.inD||'')+'</span>'
+    +'<span class="dv c4">'+(x.inG||'')+'</span>'
+    +'<span class="dv cT">'+(x.total||'')+'</span>'
+    +'</div>';
+}
+/* 数据报表：5 个状态维度标签（待学习/学习中/已认识/再次复习/已熟悉） */
+function daily5tags(){
+  const c=__counts||{};
+  const items=[['new',t('rv_new'),c.new||0,'#10B981'],['learning',t('rv_learning'),c.learning||0,'#3B82F6'],['mastered',t('rv_mastered'),c.mastered||0,'#8B5CF6'],['due',t('rv_round2'),c.due||0,'#D97706'],['graduated',t('rv_grad'),c.grad||0,'#059669']];
+  return '<div class="daily-tags">'+items.map(x=>'<span class="dtag" style="--c:'+x[3]+'"><b>'+x[2]+'</b><i>'+x[1]+'</i></span>').join('')+'</div>';
+}
+/* 今日统计详情页 */
+function renderDailyDetail(){
+  const d=computeDaily();
+  $('daily-body').innerHTML='<div class="daily-cards">'+daily5tags()+'</div>'
+    +'<div class="daily-sec"><h3><span>'+t('dl_stat')+' · '+t('dl_30')+'</span><span class="streak-badge">🔥 '+t('dl_streak')+' '+d.streak+t('dl_days')+'</span></h3>'
+    +'<div class="d30head"><span>'+t('dl_date')+'</span><span class="hN">'+t('dl_new')+'</span><span class="h0">'+t('rv_new')+'</span><span class="h1">'+t('rv_learning')+'</span><span class="h2">'+t('rv_mastered')+'</span><span class="h3">'+t('rv_round2')+'</span><span class="h4">'+t('rv_grad')+'</span><span class="hT">'+t('dl_total')+'<small>'+t('dl_total_note')+'</small></span></div>'
+    +'<div class="d30list">'
+    +d.days30.map(d30rowHTML).join('')
+    +'</div></div>';
+}
 
 function renderHeader(){
   const c=__counts;
   $('st-total').textContent=allCards.length;
-  $('st-queue').textContent=c.new+c.learning;
+  $('st-queue').textContent=c.new+c.learning+c.due;
   $('st-mastered').textContent=c.mastered;
 }
 
@@ -4847,12 +5040,19 @@ function renderRecent(){
 }
 function wordItemHTML(c){
   const pending=c.pending?' <span class="badge pending">'+t('status_pending')+'</span>':'';
-  const wrong=(c.status==='learning'&&c.wrongCount>0)?' <span class="badge wrong" title="'+t('wrong_times')+' '+c.wrongCount+'">✕'+c.wrongCount+'</span>':'';
+  const wrong=(c.status==='learning'&&c.reviewCount>0)?' <span class="badge wrong" title="'+t('learn_times')+c.reviewCount+t('times_word')+'">✕'+c.reviewCount+'</span>':'';
   const star=lookupBuiltin(c.word)?'':'<span class="star" title="'+t('t_star_hint')+'">*</span>';
   const tag=tagOf(c)?'<span class="tagb" title="'+esc(tagOf(c))+'">'+esc(tagOf(c))+'</span>':'';
+  const ibad=ipaBroken(c)?' <span class="badge ipabad" title="'+t('ipa_bad_hint')+'">'+t('ipa_bad')+'</span>':'';
+  const due=isDue(c)?' <span class="badge due" title="'+t('due_hint')+'">'+t('due_badge')+'</span>':'';
+  const grad=c.graduated?' <span class="badge grad" title="'+t('grad_hint')+'">'+t('grad_badge')+'</span>':'';
+  let stat='';
+  if(c.status==='mastered') stat='<span class="dstat">'+t('mst_cnt')+Math.max(1,c.masteredCount||0)+t('times_word')+(c.graduated?'<span class="badge due mini" title="'+t('due_hint')+'">R'+Math.max(0,(c.masteredCount||1)-1)+'</span>':'')+(c.lastReviewedAt?' · '+t('st_rev_last')+relTime(c.lastReviewedAt):'')+'</span>';
+  else if(c.status==='learning'&&c.lastReviewedAt) stat='<span class="dstat">'+t('st_rev_last')+relTime(c.lastReviewedAt)+'</span>';
   return '<div class="worditem"><span class="w">'+esc(c.word)+star+tag+'</span>'+
-    '<span class="d">'+ipaWrap(c.phonetic_us)+' '+ipaWrap(c.phonetic_uk)+'<br>'+esc(c.pos+' '+(c.meaning||t('meaning_pending')))+'</span>'+
-    '<span class="badge '+esc(c.status)+'">'+STATUS_NAME[c.status]+'</span>'+wrong+pending+
+    '<span class="d">'+ipaWrap(c.phonetic_us)+' '+ipaWrap(c.phonetic_uk)+ibad+'<br>'+esc(c.pos+' '+(c.meaning||t('meaning_pending')))+'</span>'+
+    stat+
+    grad+due+'<span class="badge '+esc(c.status)+'">'+STATUS_NAME[c.status]+'</span>'+wrong+pending+
     '<span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span></div>';
 }
 
@@ -4888,6 +5088,7 @@ function renderLibrary(){
 /* 卡片搜索命中：单词 / 释义 / 标签；# 开头仅匹配标签；* 通配符；「待补充」等关键词匹配释义待补充的词 */
 function cardSearchHit(c,q,qre){
   if(q==='*') return !lookupBuiltin(c.word); /* 星号标记 = 不在内置词库 */
+  if(q==='音标'||q==='待修复'||q==='ipa') return ipaBroken(c); /* 筛出所有音标异常待修复的词 */
   const PENDING_KEYS=['待补充','待完善','无释义','释义待补充','pending','待补','补充'];
   if(c.pending&&PENDING_KEYS.some(k=>q.includes(k))) return true;
   if(q.startsWith('#')) return (tagOf(c)||'').toLowerCase().includes(q.slice(1).toLowerCase());
@@ -5032,16 +5233,99 @@ $('builtin-search').addEventListener('input',e=>{ builtinQ=e.target.value; built
 function loadScript(src){
   return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error(t('lib_load_fail'))); document.head.appendChild(s); });
 }
+/* 智能读取文本：UTF-8 BOM → UTF-8 严格 → 回退 GB18030（常见中文 Excel 导出编码） */
+async function readTextSmart(file){
+  const buf=await file.arrayBuffer();
+  const b=new Uint8Array(buf);
+  if(b[0]===0xEF&&b[1]===0xBB&&b[2]===0xBF) return new TextDecoder('utf-8').decode(b.subarray(3));
+  try{ return new TextDecoder('utf-8',{fatal:true}).decode(b); }
+  catch(e){ try{ return new TextDecoder('gb18030').decode(b); }catch(e2){ return new TextDecoder('utf-8').decode(b); } }
+}
+/* 引号感知 + 跨行 CSV 解析（英文逗号 / Tab 分隔；引号内逗号与换行保留） */
+function splitCSV(text){
+  const rows=[]; let row=[], cur='', inq=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(inq){
+      if(ch==='"'){ if(text[i+1]==='"'){ cur+='"'; i++; } else inq=false; }
+      else cur+=ch;
+    }else{
+      if(ch==='"') inq=true;
+      else if(ch===','||ch==='\t'){ row.push(cur); cur=''; }
+      else if(ch==='\r'){ /* skip */ }
+      else if(ch==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+      else cur+=ch;
+    }
+  }
+  if(cur!==''||row.length){ row.push(cur); rows.push(row); }
+  return rows;
+}
+/* 表头识别：首行含「单词」且至少还有 1 个已知列名（音标/释义/例句/词性/中文/英文） */
+function parseHeaderRow(line){
+  const cells=line.split(/[,\t，]/).map(s=>s.trim().toLowerCase().replace(/[\ufeff"']/g,''));
+  const map={};
+  for(let i=0;i<cells.length;i++){
+    const h=cells[i];
+    if(/^单词$|^word|^词汇|^vocab/.test(h)) map.word=i;
+    else if(/音标|^ipa|^phonetic|^pronounc/.test(h)) map.ipa=i;
+    else if(/^释义$|^词义|^meaning|^definition|^def$|^中文释义|^zh/.test(h)) map.meaning=i;
+    else if(/^例句$|^example|^sentence|^ex$/.test(h)) map.example=i;
+    else if(/^词性$|^pos$|^part of/.test(h)) map.pos=i;
+    else if(/^英文释义|^en$|^english/.test(h)) map.en=i;
+  }
+  if(map.word!==undefined&&(map.ipa!==undefined||map.meaning!==undefined||map.example!==undefined||map.pos!==undefined)&&cells.length>=3) return map;
+  return null;
+}
+/* 释义列词性提取："1. adj.担心；害怕;2. adj.有警报装置" → [{pos:'adj',zh:'担心；害怕'},{pos:'adj',zh:'有警报装置'}] */
+const M_POS_RE=/(?:^|[；;])\s*(\d+[.．、]?\s*)?((?:n|v|vt|vi|adj|adv|prep|conj|pron|num|art|interj|aux|abbr|phr|idiom|verb|noun|adjective|adverb|preposition|conjunction|pronoun|interjection|phrase)[.．])\s*([^；;]*)/g;
+function parseMeaningField(m){
+  if(!m||!/[.．]/.test(m)) return null;
+  const out=[]; let mt; M_POS_RE.lastIndex=0;
+  while((mt=M_POS_RE.exec(m))){
+    const zh=(mt[3]||'').trim().replace(/[?？;；,，]+$/,'').trim();
+    out.push({pos:mt[2].slice(0,-1).toLowerCase(), zh});
+  }
+  return out.length?out:null;
+}
+/* 表头模式行解析：按列名映射 单词/音标/释义/词性/例句 */
+function parseMappedLine(cells,map){
+  const get=i=>{ if(i===undefined||i===null) return null; const v=cells[i]; return v==null?null:unq(String(v).trim()); };
+  const wv=get(map.word);
+  const word=wv?norm(wv):'';
+  if(!word) return null;
+  let meaning=get(map.meaning)||get(map.zh)||'';
+  let pos=get(map.pos)||'';
+  const ipa=get(map.ipa)||'';
+  let example=get(map.example)||'';
+  if(example){ example=example.split(/[\/／]/)[0].trim(); } /* 例句列常为「英文例句/中文翻译」，取英文部分 */
+  const defs=parseMeaningField(meaning);
+  if(defs&&defs.length){ pos=defs.map(d=>d.pos).filter(Boolean).join(' / '); }
+  return {word,pos,meaning,ipa,example,defs};
+}
 function parseTextImport(text){
-  const rows=[];
+  const rows=[]; rows.bad=0;   /* rows.bad：真正解析失败的行数（表头、空行、例句内换行均不算） */
+  const lines=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  let map=null;
+  if(lines.length) map=parseHeaderRow(lines[0]);
+  if(map){
+    const cellsRows=splitCSV(text);
+    for(let ri=0;ri<cellsRows.length;ri++){
+      if(ri===0) continue; /* 表头行 */
+      const cs=cellsRows[ri];
+      if(!cs||!cs.some(x=>x&&x.trim())) continue; /* 空行不计 */
+      const it=parseMappedLine(cs,map);
+      if(it) rows.push(it); else rows.bad++;
+    }
+    return rows;
+  }
   let first=true;
-  for(const line of text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean)){
+  for(const line of lines){
     if(first){
       first=false;
       if(/^(word|单词|词汇|vocabulary|word_list|词汇表)\b/i.test(line)) continue;
     }
     const it=parseLine(line);
-    if(it) rows.push(it);
+    if(it) rows.push(it); else rows.bad++;
   }
   return rows;
 }
@@ -5294,7 +5578,7 @@ $('builtin-file2').addEventListener('change',async e=>{
   let rows=[];
   const ext=(f.name.split('.').pop()||'').toLowerCase();
   try{
-    if(ext==='txt'||ext==='csv'||ext==='tsv') rows=parseTextImport(await f.text());
+    if(ext==='txt'||ext==='csv'||ext==='tsv') rows=parseTextImport(await readTextSmart(f));
     else if(ext==='xlsx'||ext==='xls') rows=await parseExcelImport(f);
     else if(ext==='docx') rows=await parseDocxImport(f);
     else if(ext==='pdf') rows=await parsePdfImport(f);
@@ -5312,12 +5596,12 @@ $('builtin-file2').addEventListener('change',async e=>{
     /* 已在内置库的词：仅当本次没有任何新信息（纯单词行）才跳过；带释义/词性/例句/标签则更新 */
     if(inBase&&!impTag&&!it.meaning&&!it.pos&&!it.example){ existN++; continue; }
     if(inBase){
-      builtinExtra[it.word]={pos:it.pos||base.pos||'',zh:it.meaning||base.zh||'',us:base.us||it.us||'',uk:base.uk||it.uk||'',example:it.example||base.example||'',tag:impTag||base.tag||''};
+      builtinExtra[it.word]={pos:it.pos||base.pos||'',zh:it.meaning||base.zh||'',us:(base.us||it.us||it.ipa||''),uk:(base.uk||it.uk||''),example:it.example||base.example||'',tag:impTag||base.tag||''};
       n++;
     }else{
       /* 新词或已导入过的词：保留旧标签（本次未填标签时不覆盖已有标签） */
       const old=builtinExtra[it.word];
-      builtinExtra[it.word]={pos:it.pos||(old&&old.pos)||'',zh:it.meaning||(old&&old.zh)||'',us:(old&&old.us)||it.us||'',uk:(old&&old.uk)||it.uk||'',example:it.example||(old&&old.example)||'',tag:impTag||(old&&old.tag)||''};
+      builtinExtra[it.word]={pos:it.pos||(old&&old.pos)||'',zh:it.meaning||(old&&old.zh)||'',us:(old&&old.us)||it.us||it.ipa||'',uk:(old&&old.uk)||it.uk||'',example:it.example||(old&&old.example)||'',tag:impTag||(old&&old.tag)||''};
       delete builtinRemoved[it.word];
       n++;
     }
@@ -5377,8 +5661,8 @@ function rvStats(){
   const q=rvSearchNorm(reviewQ);
   let arr=allCards;
   if(q){ const qre=rvSearchRE(q); arr=allCards.filter(c=>cardSearchHit(c,q,qre)); }
-  const n=arr.filter(x=>x.status==='new').length, l=arr.filter(x=>x.status==='learning').length, m=arr.filter(x=>x.status==='mastered').length;
-  return {total:arr.length,new:n,learning:l,mastered:m};
+  const n=arr.filter(x=>x.status==='new').length, l=arr.filter(x=>x.status==='learning').length, m=arr.filter(x=>x.status==='mastered').length, d=arr.filter(x=>isDue(x)).length, g=arr.filter(x=>x.graduated).length;
+  return {total:arr.length,new:n,learning:l,mastered:m,due:d,grad:g};
 }
 function reviewQueueBuild(){
   reviewQueue=buildQueue(allCards, reviewFilter);
@@ -5390,12 +5674,19 @@ function reviewQueueBuild(){
 }
 function renderReview(){
   const c=rvStats();
-  $('rv-queue-num').textContent=c.new+c.learning;
+  $('rv-queue-num').textContent=c.new+c.learning+c.due;
   $('rv-new-num').textContent=c.new;
   $('rv-learn-num').textContent=c.learning;
-  /* 状态筛选 chips：全部 / 待学习 / 学习中 / 已记住 */
-  const chips=[['all',t('st_all')+' '+(c.new+c.learning)],['new',t('rv_new')+' '+c.new],['learning',t('rv_learning')+' '+c.learning],['mastered',t('rv_mastered')+' '+c.mastered]];
-  $('rv-chips').innerHTML=chips.map(([k,label])=>'<button class="chip'+(reviewFilter===k?' on':'')+'" data-rf="'+k+'">'+label+'</button>').join('');
+  $('rv-due-num').textContent=c.due;
+  /* 到期提示：有已记住的词到期，自动回到复习队列 */
+  const dueBar=$('rv-due-bar');
+  if(dueBar){
+    if(c.due>0){ dueBar.style.display='block'; dueBar.textContent=t('rv_due1')+c.due+t('rv_due2'); }
+    else dueBar.style.display='none';
+  }
+  /* 状态筛选 chips：全部 / 待学习 / 学习中 / 已记住 / 二轮复习(到期) / 已熟悉(毕业) */
+  const chips=[['all',t('st_all')+' '+(c.new+c.learning+c.due),''],['new',t('rv_new')+' '+c.new,''],['learning',t('rv_learning')+' '+c.learning,''],['mastered',t('rv_mastered')+' '+c.mastered,''],['due',t('rv_round2')+' '+c.due,'due-chip'],['graduated',t('rv_grad')+' '+c.grad,'grad-chip']];
+  $('rv-chips').innerHTML=chips.map(([k,label,cls])=>'<button class="chip '+cls+(reviewFilter===k?' on':'')+'" data-rf="'+k+'">'+label+'</button>').join('');
   $('rv-chips').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{
     if(reviewFilter===el.dataset.rf) return;
     reviewFilter=el.dataset.rf; reviewQueueBuild(); renderReview();
@@ -5410,7 +5701,8 @@ function renderReview(){
     }
     if(reviewFilter!=='all'){
       /* 筛选状态下无词：显示对应空提示，不显示"复习完成" */
-      $('rv-body').innerHTML='<div class="donebox" style="margin:16px auto;max-width:460px;"><div class="t">'+t(reviewFilter==='new'?'rv_empty_new':reviewFilter==='learning'?'rv_empty_learning':'rv_empty_mastered')+'</div></div>';
+      const emptyKey={new:'rv_empty_new',learning:'rv_empty_learning',mastered:'rv_empty_mastered',due:'rv_empty_due',graduated:'rv_empty_grad'}[reviewFilter]||'rv_empty_mastered';
+      $('rv-body').innerHTML='<div class="donebox" style="margin:16px auto;max-width:460px;"><div class="t">'+t(emptyKey)+'</div></div>';
       return;
     }
     $('rv-body').innerHTML='<div style="padding:20px 14px 10px;"><div class="donebox"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2E8B57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><div class="t">'+t('t_review_done')+'</div><div class="s">'+t('t_review_stats')+' '+c.mastered+' · '+t('st_new')+' '+c.new+' · '+t('st_learning')+' '+c.learning+'</div><div style="margin-top:16px;display:flex;gap:10px;justify-content:center;"><button id="rv-reset" class="btn">'+t('t_relearn')+'</button><button id="rv-mastered" class="btn">'+t('t_view_mastered')+'</button></div></div></div>';
@@ -5423,14 +5715,18 @@ function renderReview(){
   $('rv-progress').style.width=(total?Math.round(done/total*100):0)+'%';
   const card=reviewQueue[reviewIdx]||reviewQueue[0];
   if(!card) return;
-  const rvNote=(card.status==='learning'&&card.wrongCount>0)?'<div style="margin-top:12px;"><span class="badge wrong" title="'+t('wrong_times')+' '+card.wrongCount+' '+t('times_word')+'">✕'+card.wrongCount+'</span></div>':'';
+  const rvNote=(card.status==='learning'&&card.reviewCount>0)?'<div style="margin-top:12px;"><span class="badge wrong" title="'+t('learn_times')+card.reviewCount+t('times_word')+'">✕'+card.reviewCount+'</span></div>':'';
+  const rvDue=isDue(card)?'<div style="margin-top:12px;"><span class="badge due" title="'+t('due_hint')+'">R'+Math.max(0,(card.masteredCount||1)-1)+'</span></div>':'';
+  const rvMst=(card.status==='mastered'&&!isDue(card))?'<div style="margin-top:12px;display:flex;gap:6px;justify-content:center;"><span class="badge mastered" title="'+t('mst_hint')+'">'+t('mst_cnt')+Math.max(1,card.masteredCount||0)+t('times_word')+'</span>'+(card.graduated?'<span class="badge due" title="'+t('due_hint')+'">R'+Math.max(0,(card.masteredCount||1)-1)+'</span>':'')+'</div>':'';
   if(!reviewFlipped){
     $('rv-body').innerHTML=
     '<div class="reviewstage"><div class="flipcard"><div class="w">'+esc(card.word)+(lookupBuiltin(card.word)?'':' <span class="star" title="'+t('not_in_builtin')+'">*</span>')+(tagOf(card)?' <span class="tagb" title="'+esc(tagOf(card))+'">'+esc(tagOf(card))+'</span>':'')+'</div>'+
-    rvNote+
+    rvNote+rvDue+rvMst+
     '<div class="ipa">'+t('t_am')+' '+ipaWrap(card.phonetic_us)+(card.phonetic_uk?' &nbsp;<b>·</b>&nbsp; '+t('t_uk')+' '+ipaWrap(card.phonetic_uk):'')+spkBtn(card.word,'us',t('speak_am'))+'</div>'+
     '<button id="rv-flip" style="margin-top:22px;border:none;background:none;color:var(--st-mastered);font-size:14.5px;font-weight:600;cursor:pointer;">'+t('t_flip')+'</button></div>'+
-    '<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark no" data-m="no"><span class="mi">✕</span>'+t('no')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button></div>'+
+    (reviewFilter==='due'
+      ?'<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark grad" data-m="grad"><span class="mi">★</span>'+t('rv_grad')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'（'+t('due_badge')+'）</button></div>'
+      :'<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark no" data-m="no"><span class="mi">✕</span>'+t('no')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button></div>')+
     '<div class="reviewtip">'+(done+1)+' / '+total+'</div></div>';
     bindSpeakers($('rv-body'));
     $('rv-flip').addEventListener('click',()=>{reviewFlipped=true;renderReview();});
@@ -5450,7 +5746,9 @@ function renderReview(){
     '<div class="rrow" style="display:flex;align-items:flex-start;gap:8px;"><b style="flex:none;margin:0;padding-top:2px;">'+t('f_memo')+'</b><span id="rv-memo-text" style="flex:1;min-width:0;word-break:break-all;">'+esc(card.mnemonic||t('rv_no_memo'))+'</span><button id="rv-ai-memo" class="btn sm primary" style="flex:none;">'+t('ai_memo')+'</button></div>'+
     (card.example?'<div class="rrow"><b>'+t('f_example_short')+'</b><em>'+esc(card.example)+'</em></div>':'')+
     '</div></div>'+
-    '<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'+
+    (reviewFilter==='due'
+      ?'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'（'+t('due_badge')+'）</button><button class="mark grad" data-m="grad"><span class="mi">★</span>'+t('rv_grad')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
+      :'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>')+
     '<div class="reviewtip">'+(__reviewPending=== 'fuzzy'?t('rv_pending_fuzzy'):__reviewPending==='no'?t('rv_pending_no'):t('review_tip2'))+'</div></div>';
     const body=$('rv-body');
     body.querySelectorAll('.mark').forEach(b=>b.addEventListener('click',()=>markReview(b.dataset.m)));
@@ -5488,10 +5786,21 @@ function renderReview(){
 /* 正面点「模糊/不认识」后先翻面看答案：点击瞬间即标记为学习中（即时生效），翻面后由「下一个」确认队列移动 */
 let __reviewPending=null;
 
+/* 按按钮点击时的卡片状态累计当日次数：new→待学习；learning→学习中；mastered→已认识；due→再次复习；graduated→已熟悉 */
+function bumpByStatus(st){
+  if(st==='new') bumpLog('ckNew');
+  else if(st==='learning') bumpLog('ckLearn');
+  else if(st==='mastered') bumpLog('ckMst');
+  else if(st==='due') bumpLog('ckDue');
+  else if(st==='graduated') bumpLog('ckGrad');
+}
+function statusKey(c){ if(c.graduated) return 'graduated'; if(c.status==='mastered') return isDue(c)?'due':'mastered'; return c.status; }
+
 /* 即时标记：点「模糊/不认识」立刻写入学习状态，不等翻面确认 */
 function markFuzzyNow(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
+  bumpByStatus(statusKey(card)); /* 在待学习/学习中状态点按钮 → 累计到对应状态 */
   card.status='learning'; card.wrongCount++;
   DB.put(card);
 }
@@ -5500,6 +5809,7 @@ async function markReview(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
   let alreadyMarked=false;
+  const preKey=statusKey(card); /* 点击前的卡片状态，用于计数（避免刷新 lastReviewedAt 后到期判断失效） */
   if(m==='yes'){
     /* 「认识」需要先通过中文释义验证，答对才真正标记为已记住 */
     const pass=await verifyMeaning(card);
@@ -5511,8 +5821,10 @@ async function markReview(m){
     m=__reviewPending; __reviewPending=null; alreadyMarked=true;
   }
   card.reviewCount++; card.lastReviewedAt=Date.now();
-  if(m==='yes'){ card.status='mastered'; }
-  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; }
+  if(!alreadyMarked) bumpByStatus(preKey); /* 每个状态下点底部按钮都累计一次（按点击前状态） */
+  if(m==='yes'){ card.status='mastered'; card.masteredCount=(card.masteredCount||0)+1; card.masteredAt=Date.now(); }          /* 确认认识：累计记住次数、记录/刷新记住时间，开始下一轮计时 */
+  else if(m==='grad'){ card.graduated=true; card.graduatedAt=Date.now(); }                                                      /* 已熟悉：毕业，不再进入后续轮次 */
+  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; card.masteredAt=0; }  /* 降级：回到学习队列，清除到期计时 */
   /* m==='next' 且无待定标记：继续下一词，保持当前学习状态不变 */
   await DB.put(card);
   reviewFlipped=false;
@@ -5569,7 +5881,7 @@ function vmStopRecognition(){
 $('vm-mic').addEventListener('click',()=>{
   vmStopRecognition(); /* 先清理可能残留的旧实例，确保下一个词也能正常使用 */
   if(isWeChat()){ toast(t('voice_wechat')); return; }
-  if(!voiceSupported()){ toast(t('voice_unsupported2')); return; }
+  if(!voiceSupported()){ toast(t('voice_fallback')); $('vm-input').focus(); return; }
   const card=reviewQueue[reviewIdx];
   $('vmv-sub').textContent=card?t('vm_msg1')+card.word+t('vm_msg2'):t('vmv_sub');
   $('vmv-live').textContent=''; $('vmv-result').style.display='none'; $('vmv-confirm').style.display='none';
@@ -5652,6 +5964,8 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   showView(t.dataset.view);
 }));
 $('rv-search').addEventListener('input',e=>{ reviewQ=e.target.value; reviewQueueBuild(); renderReview(); });
+$('rv-streak-btn').addEventListener('click',()=>{ renderDailyDetail(); showView('daily'); });
+$('daily-back').addEventListener('click',()=>{ showView('review'); refresh(); });
 $('rv-back').addEventListener('click',()=>{  if(reviewFlipped){
     /* 翻面后点返回：翻回正面，停留在复习页 */
     reviewFlipped=false; renderReview();
@@ -5661,14 +5975,25 @@ $('rv-back').addEventListener('click',()=>{  if(reviewFlipped){
   }
 });
 
-/* ===== 词卡详情 ===== */
+/* 词卡详情 ===== */
+function relTime(ts){
+  if(!ts) return '';
+  const d=Date.now()-ts, m=Math.floor(d/60000);
+  if(m<1) return t('ago_now');
+  if(m<60) return m+t('ago_min');
+  const h=Math.floor(m/60);
+  if(h<24) return h+t('ago_hour');
+  return Math.floor(h/24)+t('ago_day');
+}
 function fillCardDetail(c){
   $('cd-word').innerHTML=esc(c.word)+(lookupBuiltin(c.word)?'':' <span class="star" title="'+t('not_in_builtin')+'">*</span>')+(tagOf(c)?' <span class="tagb" title="'+esc(tagOf(c))+'">'+esc(tagOf(c))+'</span>':'');
   const miss=!c.phonetic_us&&!c.phonetic_uk;
+  const bad=ipaBroken(c);
   $('cd-ipa').innerHTML=
     '<div>'+t('t_am')+' '+ipaWrap(c.phonetic_us)+spkBtn(c.word,'us',t('speak_am'))+'</div>'+
     (c.phonetic_uk?'<div>'+t('t_uk')+' '+ipaWrap(c.phonetic_uk)+spkBtn(c.word,'uk',t('speak_uk'))+'</div>':'')+
-    (miss?'<button id="cd-get-phon" class="btn sm ghost" style="margin-top:10px;">'+t('t_get_phon')+'</button>':'');
+    (bad?'<div class="ipawarn">'+t('ipa_bad_hint')+'</div>':'')+
+    ((miss||bad)?'<button id="cd-get-phon" class="btn sm ghost" style="margin-top:10px;">'+(bad?t('t_fix_phon'):t('t_get_phon'))+'</button>':'');
   bindSpeakers($('cd-ipa'));
   const g=$('cd-get-phon');
   if(g) g.addEventListener('click',async()=>{
@@ -5690,16 +6015,39 @@ function fillCardDetail(c){
         const online=await lookupOnline(c2.word);
         if(online){ if(!us&&online.us) us=online.us; if(!uk&&online.uk) uk=online.uk; }
       }
+      const bad2=ipaBroken(c2);
       if(us||uk){
-        if(!c2.phonetic_us&&us) c2.phonetic_us=us;
-        if(!c2.phonetic_uk&&uk) c2.phonetic_uk=uk;
+        if((!c2.phonetic_us&&us)||(bad2&&us)) c2.phonetic_us=us;  /* 异常音标允许被覆盖 */
+        if((!c2.phonetic_uk&&uk)||(bad2&&uk)) c2.phonetic_uk=uk;
         await DB.put(c2); refresh();
         fillCardDetail(allCards.find(x=>x.id===editingId)||c2);
         toast(t('t_phon_ok'));
-      }else{ g.disabled=false; g.textContent=t('t_get_phon'); toast(t('t_phon_fail')); }
+      }else{ g.disabled=false; g.textContent=bad2?t('t_fix_phon'):t('t_get_phon'); toast(t('t_phon_fail')); }
     }catch(e){ g.disabled=false; g.textContent=t('t_get_phon'); toast(t('t_phon_fail')); }
   });
   renderDefs(c);
+  /* 复习统计：次数 / 最后复习 / 记错次数 / 记住时间 */
+  const st=$('cd-stats');
+  if(st){
+    const parts=[];
+    if(c.status==='mastered') parts.push(t('mst_cnt')+Math.max(1,c.masteredCount||0)+t('times_word'));
+    else if(c.status==='learning'&&c.reviewCount>0) parts.push(t('learn_cnt')+c.reviewCount+t('times_word'));
+    if(c.lastReviewedAt) parts.push(t('st_rev_last')+relTime(c.lastReviewedAt));
+    if(c.status==='mastered'&&c.masteredAt) parts.push(t('st_mastered_at')+relTime(c.masteredAt));
+    if(isDue(c)) parts.push('<span class="badge due" style="padding:0 7px;">'+t('due_badge')+'</span>');
+    if(c.graduated) parts.push('<span class="badge grad" style="padding:0 7px;">'+t('grad_badge')+'</span>');
+    if(parts.length){ st.style.display='flex'; st.innerHTML=parts.map(x=>'<span>'+x+'</span>').join(''); }
+    else st.style.display='none';
+  }
+  /* 已记住词的「熟悉」标记：非常熟悉的词不再自动到期复习 */
+  const gradBtn=$('cd-grad');
+  if(gradBtn){
+    if(c.status==='mastered'){
+      gradBtn.style.display='inline-flex';
+      gradBtn.textContent=c.graduated?t('cd_ungrad'):t('cd_grad');
+      gradBtn.className='btn sm ghost'+(c.graduated?' grad-on':'');
+    }else gradBtn.style.display='none';
+  }
   const deco=decompose(c.word);
   $('cd-root').value=c.root||(deco?deco.display:'');
   $('cd-mnemonic').value=c.mnemonic||'';
@@ -5952,6 +6300,23 @@ $('ai-test').addEventListener('click',async()=>{
     toast('✕ '+(e.message||''));
   } finally { btn.disabled=false; btn.textContent=old; }
 });
+/* 词库页「更多」菜单 → 复习间隔设置 */
+const revintTrigger=document.createElement('button');
+revintTrigger.id='btn-revint'; revintTrigger.style.display='none';
+document.body.appendChild(revintTrigger);
+revintTrigger.addEventListener('click',openRevintModal);
+function openRevintModal(){
+  $('revint-input').value=revIntervalDays();
+  $('revint-modal').classList.add('show');
+}
+function closeRevintModal(){ $('revint-modal').classList.remove('show'); }
+$('revint-cancel').addEventListener('click',closeRevintModal);
+$('revint-save').addEventListener('click',()=>{
+  const v=Math.max(1,Math.min(90,parseInt($('revint-input').value,10)||3));
+  try{ localStorage.setItem('sv_rev_interval',String(v)); }catch(e){}
+  closeRevintModal(); refresh(); toast(t('rev_int_saved')+'：'+v+t('rev_int_day'));
+});
+
 /* 词库页「更多」菜单 → 大模型API配置 */
 const aiTrigger=document.createElement('button');
 aiTrigger.id='btn-ai'; aiTrigger.style.display='none';
@@ -6004,6 +6369,14 @@ $('cd-delete').addEventListener('click',async()=>{
   if(!await uiConfirm(t('del_confirm1')+c.word+t('del_confirm2'))) return;
   await DB.del(c.id); refresh(); showView('library'); toast(t('t_deleted'));
 });
+/* 「熟悉」标记：已记住词不再自动到期复习，可随时取消 */
+$('cd-grad').addEventListener('click',async()=>{
+  const c=allCards.find(x=>x.id===editingId); if(!c) return;
+  c.graduated=!c.graduated;
+  await DB.put(c); refresh();
+  fillCardDetail(allCards.find(x=>x.id===editingId)||c);
+  toast(c.graduated?t('grad_ok'):t('ungrad_ok'));
+});
 
 /* ===== 单词发音朗读（浏览器内置 TTS：speechSynthesis，微信内置/Safari/Chrome 大多可用，无需联网） ===== */
 function speakWord(word, accent){
@@ -6043,8 +6416,9 @@ $('btn-voice').addEventListener('click',()=>{
     return;
   }
   if(!voiceSupported()){
-    $('voice-live').textContent=t('voice_unsupported2');
-    $('mic-icon').classList.remove('live');
+    ov.classList.remove('show');
+    toast(t('voice_fallback'));
+    $('in-word').focus();
     return;
   }
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -6207,7 +6581,7 @@ async function parseImportFile(file){
   const log=$('import-log'); log.style.display='block'; log.className='importlog';
   try{
     const ext=(file.name.split('.').pop()||'').toLowerCase();
-    if(ext==='txt'||ext==='csv'||ext==='tsv'){ await runImport(await file.text()); return; }
+    if(ext==='txt'||ext==='csv'||ext==='tsv'){ await runImport(await readTextSmart(file)); return; }
     let rows=null;
     if(ext==='docx') rows=await parseDocxImport(file);
     else if(ext==='pdf') rows=await parsePdfImport(file);
@@ -6260,8 +6634,7 @@ function parseLine(line){
 }
 async function runImport(text){
   const rows=parseTextImport(text);
-  const total=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).length;
-  return runImportRows(rows, Math.max(0,total-rows.length));
+  return runImportRows(rows, rows.bad||0);
 }
 /* 统一的生词入库流程：接受已解析的 rows（[{word,pos,meaning,defs,...}]），
    文本 / Word / PDF 导入共用；bad 为解析阶段丢弃的非法行数（仅文本有） */
@@ -6278,7 +6651,7 @@ async function runImportRows(rows, bad){
     if(have.has(it.word)){
       /* 重复词：若此行带释义/词性，且旧卡释义为空或待补全，则补全旧卡而非跳过 */
       const old=exist.find(c=>c.word===it.word);
-      if(old&&(it.meaning||it.pos)&&(!old.meaning||old.pending)){
+      if(old&&(it.meaning||it.pos||it.ipa||it.example)&&(!old.meaning||old.pending)){
         let changed=false;
         if(it.pos&&!old.pos){ old.pos=it.pos; changed=true; }
         if(it.meaning&&(!old.meaning||old.pending)){
@@ -6286,12 +6659,14 @@ async function runImportRows(rows, bad){
           if(it.defs&&it.defs.length) old.defs=it.defs;
           changed=true;
         }
+        if(it.ipa&&!old.phonetic_us){ old.phonetic_us=it.ipa; changed=true; }
+        if(it.example&&!old.example){ old.example=it.example; changed=true; }
         if(changed){ words.push({word:it.word,pos:it.pos,meaning:it.meaning,defs:it.defs,upd:true,card:old}); continue; }
       }
       dup++; continue;
     }
     have.add(it.word);
-    words.push({word:it.word,pos:it.pos,meaning:it.meaning,defs:it.defs,upd:false,card:null});
+    words.push({word:it.word,pos:it.pos,meaning:it.meaning,defs:it.defs,ipa:it.ipa,example:it.example,upd:false,card:null});
   }
   const badTxt=bad?('，'+t('import_illegal')+bad):'';
   if(!words.length){ log.textContent=t('no_new_words1')+linesN+t('no_new_words2')+dup+badTxt+')'; return; }
@@ -6308,7 +6683,10 @@ async function runImportRows(rows, bad){
         if(it.pos) card.pos=it.pos;
         if(it.meaning){ card.meaning=it.meaning; card.pending=false; }
         if(it.defs&&it.defs.length) card.defs=it.defs;
+        if(it.ipa&&!card.phonetic_us) card.phonetic_us=it.ipa;
+        if(it.example) card.example=it.example;
         await DB.add(card);
+        bumpLog('addNew'); /* 批量导入计入当日新增 */
         it.card=card;   // 回写卡片引用，供「撤回上次导入」记录 id
       }
       await enrichCard(card,true,true);
@@ -6324,6 +6702,12 @@ async function runImportRows(rows, bad){
   const addN=words.filter(x=>!x.upd).length, updN=words.filter(x=>x.upd).length;
   log.textContent=t('import_done_log1')+addN+t('import_done_log2')+(updN?t('import_done_log3')+updN+t('import_done_log4'):'')+(pendingWords.length?t('import_done_log5')+pendingWords.length+t('import_done_log6'):'')+'（'+t('st_all')+dup+badTxt+'）';
   log.className='importlog ok';
+  /* 导入完成：检测异常音标并自动用豆包批量修复（已配置大模型 API 时） */
+  try{
+    const ipaCards=words.map(x=>x.card).filter(Boolean);
+    const fixedN=await autoFixIPA(ipaCards,log);
+    if(fixedN){ refresh(); toast(t('ipa_auto_ok1')+fixedN+t('ipa_auto_ok2')); }
+  }catch(e){}   /* 修复失败不阻塞导入，词会保留「音标待修复」标记 */
   /* 记录本次新增的词，供「撤回上次导入」使用（补全旧卡不算新增，不记录） */
   try{
     const added=words.filter(x=>!x.upd);
@@ -6332,6 +6716,40 @@ async function runImportRows(rows, bad){
   refresh();
   toast(t('import_ok_toast1')+words.length+t('import_ok_toast2')+(updN?t('import_ok_toast3')+updN+t('import_ok_toast4'):'')+(pendingWords.length?t('import_ok_toast5')+pendingWords.length+t('import_ok_toast6'):''));
   if(pendingWords.length) setTimeout(()=>backgroundEnrich(pendingWords),300);
+}
+/* 批量修复异常音标：把含 ? 等损坏字符的音标打包成少量豆包请求，一次返回全部正确音标 */
+async function autoFixIPA(cards,log){
+  const bad=cards.filter(c=>ipaBroken(c));
+  if(!bad.length) return 0;
+  if(!loadAI().key){
+    if(log) log.textContent+='\n'+t('ipa_auto_nokey1')+bad.length+t('ipa_auto_nokey2');
+    return 0;
+  }
+  let fixed=0; const BATCH=20;
+  if(log) log.textContent+='\n'+t('ipa_auto_prog');
+  for(let i=0;i<bad.length;i+=BATCH){
+    const chunk=bad.slice(i,i+BATCH);
+    const prompt='以下是若干英文单词及其中文释义，其音标中可能有损坏字符（?）。请为每个词给出正确的标准美式 IPA 音标。\n'+
+      chunk.map(c=>c.word+'：'+(c.meaning||'')).join('\n')+
+      '\n严格按每行一个词的格式输出，不要任何解释、不要输出其他内容：\n'+chunk.map(c=>c.word+': /美式音标/').join('\n');
+    try{
+      const txt=await doubaoAI(prompt);
+      const map=new Map();
+      for(const line of txt.split(/\r?\n/)){
+        const m=line.match(/^([A-Za-z][A-Za-z\s'-]*?)\s*:\s*\/?([^\/]+?)\/?\s*$/);
+        if(m) map.set(norm(m[1]),m[2].trim());
+      }
+      for(const c of chunk){
+        const ipa=map.get(norm(c.word));
+        if(ipa&&!/[?？]/.test(ipa)){
+          c.phonetic_us=ipa;
+          await DB.put(c); fixed++;
+        }
+      }
+    }catch(e){}
+    if(log) log.textContent+='\n'+t('ipa_auto_prog')+Math.min(i+BATCH,bad.length)+' / '+bad.length;
+  }
+  return fixed;
 }
 /* 后台异步在线补全释义：不阻塞界面，逐批查询并更新导入日志 */
 /* 后台异步在线补全释义：不阻塞界面，逐批查询并更新导入日志。
