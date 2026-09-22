@@ -4968,12 +4968,15 @@ function computeDaily(){
     if(dayMapStreak[k]) streak++; else break;
   }
   const lg=logOf(todayKey);
+  /* 新增列：按卡片创建时间(createdAt)实时统计，历史数据自动回填，不依赖埋点 */
+  const dayAdd={};
+  allCards.forEach(c=>{ if(c.createdAt){ const k=new Date(c.createdAt); const kk=k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate(); dayAdd[kk]=(dayAdd[kk]||0)+1; } });
   const days30=[];
   for(let i=0;i<30;i++){
     const d=new Date(t0-i*86400000), k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
     const l=logOf(k);
     days30.push({date:(d.getMonth()+1)+'/'+d.getDate(), wd:d.getDay(), today:i===0, ts:d.getTime(),
-      add:dayField(l,'addNew'), nL:dayField(l,'ckNew'), inL:dayField(l,'ckLearn'), inM:dayField(l,'ckMst'), inD:dayField(l,'ckDue'), inG:dayField(l,'ckGrad'),
+      add:dayAdd[k]||0, nL:dayField(l,'ckNew'), inL:dayField(l,'ckLearn'), inM:dayField(l,'ckMst'), inD:dayField(l,'ckDue'), inG:dayField(l,'ckGrad'),
       total:dayField(l,'ckNew')+dayField(l,'ckLearn')+dayField(l,'ckMst')+dayField(l,'ckDue')+dayField(l,'ckGrad')});
   }
   return {streak,days30,todayLog:lg,todayNew,todayReview,todayMaster};
@@ -6831,7 +6834,7 @@ $('btn-export').addEventListener('click',async()=>{
   else toast(t('ms_title')+' · '+t('ms_save'));
 });
 
-/* ===== 一键备份 / 恢复（完整快照：全部生词卡 + 内置词库增删记录） ===== */
+/* ===== 一键备份 / 恢复（完整快照：全部生词卡 + 内置词库增删记录 + 统计日志 + 偏好设置） ===== */
 /* 通用恢复：清空并写入完整快照（文件备份与自动备份共用） */
 async function applyRestore(data){
   __bgToken++;   // 终止后台补全，避免写回旧数据
@@ -6840,6 +6843,10 @@ async function applyRestore(data){
   const meta=data.meta||{};
   await DB.setMeta('builtinExtra',meta.builtinExtra||{});
   await DB.setMeta('builtinRemoved',meta.builtinRemoved||{});
+  /* 统计日志（sv_daycnt）与偏好设置（sv_prefs）随备份恢复，保证报表与设置跨设备一致 */
+  if(data.daycnt) localStorage.setItem('sv_daycnt',data.daycnt);
+  else localStorage.removeItem('sv_daycnt');
+  if(data.prefs) localStorage.setItem('sv_prefs',data.prefs);
   localStorage.removeItem(SV_LAST_IMPORT_KEY);
   await loadBuiltinDelta();
   await refresh();
@@ -6850,7 +6857,8 @@ async function saveAutoBackup(){
   const cards=await DB.all();
   if(!cards.length) return;
   const meta={builtinExtra:await DB.getMeta('builtinExtra')||{},builtinRemoved:await DB.getMeta('builtinRemoved')||{}};
-  await DB.setMeta(AUTO_BACKUP_KEY,{at:Date.now(),cards,meta});
+  await DB.setMeta(AUTO_BACKUP_KEY,{at:Date.now(),cards,meta,
+    daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null});
 }
 async function getAutoBackup(){ return await DB.getMeta(AUTO_BACKUP_KEY)||null; }
 async function clearAutoBackup(){ await DB.setMeta(AUTO_BACKUP_KEY,null); }
@@ -6885,7 +6893,8 @@ $('btn-backup').addEventListener('click',async()=>{
   try{
     const cards=await DB.all();
     const meta={builtinExtra:await DB.getMeta('builtinExtra')||{},builtinRemoved:await DB.getMeta('builtinRemoved')||{}};
-    const data={app:'sat-vocab',version:1,exportedAt:Date.now(),cards,meta};
+    const data={app:'sat-vocab',version:2,exportedAt:Date.now(),cards,meta,
+      daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null};
     const d=new Date(), p=n=>String(n).padStart(2,'0');
     const ok=await saveFile('sat-vocab-backup-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'.json', JSON.stringify(data), 'application/json');
     if(ok) toast(t('backup_ok')+cards.length+t('backup_ok2'));
