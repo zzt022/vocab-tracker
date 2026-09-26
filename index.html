@@ -441,7 +441,7 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
         <input id="rv-search" class="input rv-search" type="text" placeholder="搜索（#标签）" autocomplete="off" spellcheck="false" data-i18n-ph="rv_search_ph">
       </div>
       <div class="cardbox progresscard">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--text2);"><span><span data-i18n="rv_queue">今日复习队列</span> <b id="rv-queue-num" style="color:var(--text);">0</b> <span data-i18n="builtin_word">词</span> · <span data-i18n="rv_new">待学习</span> <b id="rv-new-num" style="color:var(--st-new);">0</b> · <span data-i18n="rv_learning">学习中</span> <b id="rv-learn-num" style="color:var(--st-learning);">0</b> · <span data-i18n="rv_round2">再次复习</span> <b id="rv-due-num" style="color:var(--st-due,#9A6B1F);">0</b></span><button id="rv-streak-btn" class="streakbtn" title="查看今日统计详情">🔥 <span data-i18n="dl_streak">连续学习</span> <b>0</b> <span data-i18n="dl_days"> 天</span></button></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--text2);"><span><span data-i18n="rv_queue">今日复习队列</span> <b id="rv-queue-num" style="color:var(--text);">0</b> <span data-i18n="builtin_word">词</span> · <span data-i18n="rv_new">待学习</span> <b id="rv-new-num" style="color:var(--st-new);">0</b> · <span data-i18n="rv_learning">学习中</span> <b id="rv-learn-num" style="color:var(--st-learning);">0</b> · <span data-i18n="rv_round2">再次复习</span> <b id="rv-due-num" style="color:var(--st-due,#9A6B1F);">0</b></span><button id="rv-streak-btn" class="streakbtn">🔥 <span data-i18n="dl_streak">连续学习</span> <b>0</b> <span data-i18n="dl_days"> 天</span></button></div>
         <div id="rv-due-bar" class="rvdue" style="display:none;"></div>
         <div class="progressbar"><i id="rv-progress" style="width:0%"></i></div>
       </div>
@@ -710,7 +710,7 @@ const I18N={
     regen:'重新生成', f_memo:'记忆方法', another:'换一条',
     ai_memo:'豆包生成', ai_memo_ph:'粘贴豆包生成的记忆法…', ai_memo_toast:'豆包 Prompt 已复制！请粘贴到豆包对话生成记忆法，再把回答复制粘贴到此处保存',
     ai_memo_copy_fail:'复制失败：Prompt 已填入输入框，请全选手动复制到豆包',
-    ai_config:'大模型API配置', ai_title:'大模型API配置', ai_help:'填入你在火山方舟申请的 API Key 后，「豆包生成」将一键直连豆包自动生成记忆法。Key 仅保存在本机浏览器，不会上传、不会写入代码。', ai_key:'API Key', ai_model:'模型 ID', ai_model_help:'需先在方舟控制台「开通管理」开通对应模型（如 doubao-seed-2-1-turbo）；新用户有免费推理额度。', ai_clear:'清除', ai_save:'保存', ai_test:'测试连接', ai_saved:'大模型API配置已保存', ai_cleared:'大模型API配置已清除', ai_testing:'测试中…', ai_generating:'豆包生成中…', ai_ok:'豆包已生成记忆法，点「保存修改」即可', ai_empty:'豆包返回为空，请重试', ai_fail:'豆包生成失败', rv_ai_saved:'已生成并保存到词卡', rv_no_memo:'（暂无记忆法）', ai_hint:'当前模型实测较慢，推荐切换到 Doubao-Seed-2.0 Mini（约 2 秒）',
+    ai_config:'大模型API配置', ai_title:'大模型API配置', ai_help:'填入你在火山方舟申请的 API Key 后，「豆包生成」将一键直连豆包自动生成记忆法。Key 仅保存在本机浏览器，不会上传、不会写入代码。', ai_key:'API Key', ai_model:'模型 ID', ai_model_help:'需先在方舟控制台「开通管理」开通对应模型（如 doubao-seed-2-1-turbo）；新用户有免费推理额度。', ai_clear:'清除', ai_save:'保存', ai_test:'测试连接', ai_saved:'大模型API配置已保存', ai_cleared:'大模型API配置已清除', ai_testing:'测试中…', ai_generating:'豆包生成中…', ai_ok:'豆包已生成记忆法，点「保存修改」即可', ai_empty:'豆包返回为空，请重试', ai_fail:'豆包生成失败', rv_ai_saved:'已生成并保存到词卡', rv_no_memo:'（暂无记忆法）', ai_hint:'当前模型实测较慢，推荐切换到 Doubao-Seed-2.0 Mini（约 2 秒）', ai_dead_hint:'⚠ 豆包 API Key 无效或额度不足，已停止自动补全。请在「设置 → 大模型API配置」检查 Key，或充值后重试。',
     del_card:'删除词卡', save_changes:'保存修改', footnote:'释义/音标来自免费词典接口与内置词库 · 词根助记：本地规则 + 豆包生成 · 数据仅存于本机浏览器',
     st_new:'待学习', st_learning:'学习中', st_mastered:'已认识',
     voice_title2:'语音录入', voice_sub:'说出一个英文单词，如 "circumvent"', voice_result:'识别结果（可编辑修正）', cancel:'取消', ok:'确定', confirm_add:'确认录入',
@@ -736,7 +736,7 @@ const I18N={
     t_builtin_import_ok:'内置词库导入完成', t_builtin_clear_ok:'已清空内置词库', t_builtin_restore_ok:'已恢复默认词库',
     t_builtin_search:'没有匹配的词', t_builtin_empty:'内置词库为空',
     t_pos_hint:'词性，如 v.', t_zh_hint:'该词性对应的中文释义', t_del_row:'删除此行',
-    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音', ipa_bad:'音标待修复', ipa_bad_hint:'音标含异常字符（可能来自文件转换），点击下方按钮用豆包重新生成', t_fix_phon:'用豆包修复音标', ipa_auto_nokey1:'检测到 ', ipa_auto_nokey2:' 个异常音标；在「设置 → 大模型 API 配置」填入 Key 后，导入时可自动修复', ipa_auto_prog:'\n正在用豆包批量修复音标… ', ipa_auto_ok1:'已自动修复 ', ipa_auto_ok2:' 个音标', rev_int:'复习间隔设置', rev_int_title:'已认识复习间隔', rev_int_help:'已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。', rev_int_label:'间隔天数', rev_int_saved:'已认识复习间隔已保存', rev_int_day:' 天', rv_due1:'有 ', rv_due2:' 个已认识的词需复习，已自动加入复习队列（点「认识」确认后重新计时）', due_badge:'需复习', due_hint:'已认识需复习，已自动加入复习队列；复习时点「认识」确认后重新计时', grad_badge:'熟悉', grad_hint:'已标记熟悉：不再自动安排复习，可在详情页取消', cd_grad:'标记为熟悉', cd_ungrad:'取消熟悉', grad_ok:'已标记为熟悉，不再自动安排复习', ungrad_ok:'已取消熟悉，将按间隔继续复习', rv_round2:'再次复习', rv_grad:'已熟悉', known_due:'认识（需复习）', rv_empty_due:'暂无需复习的已认识词', rv_empty_grad:'暂无已熟悉的词', dl_stat:'今日统计', dl_streak:'连续学习', dl_days:' 天', dl_week:['日','一','二','三','四','五','六'], dl_30:'近30天每日统计', dl_today:'今天', dl_date:'日期', dl_new:'新增', dl_total:'变化总数', dl_total_note:'不含新增',
+    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音', ipa_bad:'音标待修复', ipa_bad_hint:'音标含异常字符（可能来自文件转换），点击下方按钮用豆包重新生成', t_fix_phon:'用豆包修复音标', ipa_auto_nokey1:'检测到 ', ipa_auto_nokey2:' 个异常音标；在「设置 → 大模型 API 配置」填入 Key 后，导入时可自动修复', ipa_auto_prog:'\n正在用豆包批量修复音标… ', ipa_auto_ok1:'已自动修复 ', ipa_auto_ok2:' 个音标', rev_int:'复习间隔设置', rev_int_title:'已认识复习间隔', rev_int_help:'已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。', rev_int_label:'间隔天数', rev_int_saved:'已认识复习间隔已保存', rev_int_day:' 天', rv_due1:'有 ', rv_due2:' 个已认识的词需复习，已自动加入复习队列（点「认识」确认后重新计时）', due_badge:'需复习', due_hint:'已认识需复习，已自动加入复习队列；复习时点「认识」确认后重新计时', grad_badge:'熟悉', grad_hint:'已标记熟悉：不再自动安排复习，可在详情页取消', cd_grad:'标记为熟悉', cd_ungrad:'取消熟悉', grad_ok:'已标记为熟悉，不再自动安排复习', ungrad_ok:'已取消熟悉，将按间隔继续复习', rv_round2:'再次复习', rv_grad:'已熟悉', known_due:'认识', rv_empty_due:'暂无需复习的已认识词', rv_empty_grad:'暂无已熟悉的词', dl_stat:'今日统计', dl_streak:'连续学习', dl_days:' 天', dl_week:['日','一','二','三','四','五','六'], dl_30:'近30天每日统计', dl_today:'今天', dl_date:'日期', dl_new:'新增', dl_total:'变化总数', dl_total_note:'不含新增',
  ago_now:'刚刚', ago_min:' 分钟前', ago_hour:' 小时前', ago_day:' 天前',
     t_flip:'翻面查看', t_loading:'导入中…', t_done:'完成', page_of:' 页 · 共 ', words2:' 词',
     st_all:'全部', builtin_extra:'为你导入', builtin_more:'，另有 ', builtin_add:'收录', builtin_added:'已收录',
@@ -799,7 +799,7 @@ const I18N={
     regen:'Regenerate', f_memo:'Mnemonic', another:'Another one',
     ai_memo:'Doubao AI', ai_memo_ph:'Paste Doubao-generated mnemonic here…', ai_memo_toast:'Doubao prompt copied! Paste it into Doubao chat to generate a mnemonic, then paste the answer here and save',
     ai_memo_copy_fail:'Copy failed: prompt filled into the box, select all and copy it to Doubao manually',
-    ai_config:'LLM API Setup', ai_title:'LLM API Setup', ai_help:'Fill in your Volcano Ark API Key and "Doubao Generate" will call Doubao directly. The key is stored only in this browser, never uploaded or written into code.', ai_key:'API Key', ai_model:'Model ID', ai_model_help:'Enable the model first in Ark console "开通管理" (e.g. doubao-seed-2-1-turbo); new users get free quota.', ai_clear:'Clear', ai_save:'Save', ai_test:'Test Connection', ai_saved:'LLM API settings saved', ai_cleared:'LLM API settings cleared', ai_testing:'Testing…', ai_generating:'Generating…', ai_ok:'Generated! Click Save to keep it', ai_empty:'Empty response, please retry', ai_fail:'Generation failed', rv_ai_saved:'Saved to the card', rv_no_memo:'(no mnemonic yet)', ai_hint:'Current model is slow; switch to Doubao-Seed-2.0 Mini (~2s)',
+    ai_config:'LLM API Setup', ai_title:'LLM API Setup', ai_help:'Fill in your Volcano Ark API Key and "Doubao Generate" will call Doubao directly. The key is stored only in this browser, never uploaded or written into code.', ai_key:'API Key', ai_model:'Model ID', ai_model_help:'Enable the model first in Ark console "开通管理" (e.g. doubao-seed-2-1-turbo); new users get free quota.', ai_clear:'Clear', ai_save:'Save', ai_test:'Test Connection', ai_saved:'LLM API settings saved', ai_cleared:'LLM API settings cleared', ai_testing:'Testing…', ai_generating:'Generating…', ai_ok:'Generated! Click Save to keep it', ai_empty:'Empty response, please retry', ai_fail:'Generation failed', rv_ai_saved:'Saved to the card', rv_no_memo:'(no mnemonic yet)', ai_hint:'Current model is slow; switch to Doubao-Seed-2.0 Mini (~2s)', ai_dead_hint:'⚠ LLM API key invalid or quota exhausted. Auto-enrichment stopped. Check the key in Settings or top up, then retry.',
     del_card:'Delete card', save_changes:'Save changes', footnote:'Meanings/IPA from free dictionary API & built-in library · roots & mnemonics: local rules + Doubao AI · data stays in your browser',
     st_new:'New', st_learning:'Learning', st_mastered:'Known',
     voice_title2:'Voice input', voice_sub:'Say an English word, e.g. "circumvent"', voice_result:'Recognized (editable)', cancel:'Cancel', ok:'OK', confirm_add:'Confirm',
@@ -4931,6 +4931,7 @@ function buildQueue(cards, filter){
   else if(filter==='graduated') base=cards.filter(c=>c.graduated);   /* 已熟悉：毕业词，不自动进入下一轮，可手动复习 */
   else if(filter==='mastered') base=cards.filter(c=>c.status==='mastered');
   else base=cards.filter(c=>(c.status==='new'||c.status==='learning'||(filter==='all'&&isDue(c)))&&(filter==='all'||c.status===filter));
+  base.forEach(c=>{ c.__dueMode=isDue(c); });   /* 运行时标记：再次复习队列点认识记 due 埋点，不写库 */
   return base.sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
 }
 function renderAll(){ __counts=counts(); renderHeader(); renderRecent(); renderLibrary(); renderReview(); renderDaily(); }
@@ -4946,6 +4947,14 @@ function bumpLog(kind){
   }catch(e){}
 }
 function logOf(k){ try{ return (JSON.parse(localStorage.getItem('sv_daycnt')||'{}'))[k]||{}; }catch(e){ return {}; } }
+/* 学习日打卡：每次真实复习动作记录今天，供连续学习天数跨删卡/换设备保持稳定 */
+function markActiveToday(){
+  try{
+    const d=new Date(); const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const arr=JSON.parse(localStorage.getItem('sv_active_days')||'[]');
+    if(!arr.includes(k)){ arr.push(k); localStorage.setItem('sv_active_days', JSON.stringify(arr.slice(-400))); }
+  }catch(e){}
+}
 /* 当日统计：各状态下点击底部按钮的累加数（ckNew/ckLearn/ckMst/ckDue/ckGrad） */
 function dayField(l,k){ return (l&&l[k]!=null)?l[k]:0; }
 /* 每日统计（6 维度）：今日新增 / 首次学习(待学习减少) / 再次学习(次数) / 首次认识 / 再次复习(次数) / 新增熟悉 */
@@ -4962,22 +4971,43 @@ function computeDaily(){
     const act=Math.max(c.lastReviewedAt||0,c.createdAt||0);
     if(act){ const k=new Date(act); dayMapStreak[k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate()]=(dayMapStreak[k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate()]||0)+1; }
   });
-  if(dayMapStreak[todayKey]) start=0;
+  /* 独立学习日记录：删卡/恢复/换设备都不断链。
+     每次启动把卡片全部时间戳(创建/复习/记住/首次学习/毕业)归日并入日志——只增不减，修复历史；
+     删卡后已写入日志的活跃日保留，streak 不断。 */
+  try{
+    const set=new Set(JSON.parse(localStorage.getItem('sv_active_days')||'[]'));
+    allCards.forEach(c=>{
+      [c.createdAt,c.lastReviewedAt,c.masteredAt,c.firstLearnedAt,c.graduatedAt].forEach(ts=>{
+        if(ts){ const k=new Date(ts); set.add(k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate()); }
+      });
+    });
+    localStorage.setItem('sv_active_days', JSON.stringify([...set].sort().slice(-400)));
+  }catch(e){}
+  let activeDays=[];
+  try{ activeDays=JSON.parse(localStorage.getItem('sv_active_days')||'[]'); }catch(e){}
+  const activeSet=new Set(activeDays);
+  if(activeSet.has(todayKey)) start=0;
   for(let i=start;i<3660;i++){
     const d=new Date(t0-i*86400000), k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-    if(dayMapStreak[k]) streak++; else break;
+    if(activeSet.has(k)) streak++; else break;
   }
   const lg=logOf(todayKey);
-  /* 新增列：按卡片创建时间(createdAt)实时统计，历史数据自动回填，不依赖埋点 */
-  const dayAdd={};
-  allCards.forEach(c=>{ if(c.createdAt){ const k=new Date(c.createdAt); const kk=k.getFullYear()+'-'+(k.getMonth()+1)+'-'+k.getDate(); dayAdd[kk]=(dayAdd[kk]||0)+1; } });
+  /* 30 天报表：按按钮埋点累加（sv_daycnt）——每天点了几次学习/认识/复习/熟悉，就记几。
+     addNew=录入+导入新词；learn=模糊/不认识；master=认识验证通过；due=再次复习队列点认识；grad=已熟悉 */
+  let logAll={};
+  try{ logAll=JSON.parse(localStorage.getItem('sv_daycnt')||'{}'); }catch(e){}
   const days30=[];
   for(let i=0;i<30;i++){
     const d=new Date(t0-i*86400000), k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-    const l=logOf(k);
+    const L=logAll[k]||{};
+    /* 兼容旧版字段名：addNew/learn/master/due/grad 与旧版 ckNew/ckLearn/ckMst/ckDue/ckGrad */
+    const a=L.addNew||L.ckNew||0;
+    const n=L.learn||L.ckLearn||0;
+    const m=L.master||L.ckMst||L.ckMaster||L.mst||L.mastered||L.yes||L.know||L.recognize||0;
+    const u=L.due||L.ckDue||0;
+    const g=L.grad||L.ckGrad||0;
     days30.push({date:(d.getMonth()+1)+'/'+d.getDate(), wd:d.getDay(), today:i===0, ts:d.getTime(),
-      add:dayAdd[k]||0, nL:dayField(l,'ckNew'), inL:dayField(l,'ckLearn'), inM:dayField(l,'ckMst'), inD:dayField(l,'ckDue'), inG:dayField(l,'ckGrad'),
-      total:dayField(l,'ckNew')+dayField(l,'ckLearn')+dayField(l,'ckMst')+dayField(l,'ckDue')+dayField(l,'ckGrad')});
+      add:a, nL:a, inL:n, inM:m, inD:u, inG:g, total:a+n+m+u+g});
   }
   return {streak,days30,todayLog:lg,todayNew,todayReview,todayMaster};
 }
@@ -4992,7 +5022,7 @@ function renderDaily(){
   el.classList.toggle('open',wasOpen);
   $('rv-daily-toggle').addEventListener('click',()=>el.classList.toggle('open'));
 }
-/* 30 天报表行：日期 + 新增 + 5 状态按钮点击数（固定列表格） */
+/* 30 天报表行：日期 + 5 列按钮埋点累加 */
 function d30rowHTML(x){
   return '<div class="d30row'+(x.today?' on':'')+'"><span class="dt">'+(x.today?t('dl_today'):x.date)+'<small>'+t('dl_week')[x.wd]+'</small>'+(x.today?'<span class="flame">🔥</span>':'')+'</span>'
     +'<span class="dv cN">'+(x.add||'')+'</span>'
@@ -5004,7 +5034,7 @@ function d30rowHTML(x){
     +'<span class="dv cT">'+(x.total||'')+'</span>'
     +'</div>';
 }
-/* 数据报表：5 个状态维度标签（待学习/学习中/已认识/再次复习/已熟悉） */
+/* 顶部 5 个状态标签 */
 function daily5tags(){
   const c=__counts||{};
   const items=[['new',t('rv_new'),c.new||0,'#10B981'],['learning',t('rv_learning'),c.learning||0,'#3B82F6'],['mastered',t('rv_mastered'),c.mastered||0,'#8B5CF6'],['due',t('rv_round2'),c.due||0,'#D97706'],['graduated',t('rv_grad'),c.grad||0,'#059669']];
@@ -5728,7 +5758,7 @@ function renderReview(){
     '<div class="ipa">'+t('t_am')+' '+ipaWrap(card.phonetic_us)+(card.phonetic_uk?' &nbsp;<b>·</b>&nbsp; '+t('t_uk')+' '+ipaWrap(card.phonetic_uk):'')+spkBtn(card.word,'us',t('speak_am'))+'</div>'+
     '<button id="rv-flip" style="margin-top:22px;border:none;background:none;color:var(--st-mastered);font-size:14.5px;font-weight:600;cursor:pointer;">'+t('t_flip')+'</button></div>'+
     (reviewFilter==='due'
-      ?'<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark grad" data-m="grad"><span class="mi">★</span>'+t('rv_grad')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'（'+t('due_badge')+'）</button></div>'
+      ?'<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button></div>'
       :'<div class="markrow"><button class="mark fuzzy" data-m="fuzzy"><span class="mi">◐</span>'+t('fuzzy')+'</button><button class="mark no" data-m="no"><span class="mi">✕</span>'+t('no')+'</button><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button></div>')+
     '<div class="reviewtip">'+(done+1)+' / '+total+'</div></div>';
     bindSpeakers($('rv-body'));
@@ -5750,7 +5780,7 @@ function renderReview(){
     (card.example?'<div class="rrow"><b>'+t('f_example_short')+'</b><em>'+esc(card.example)+'</em></div>':'')+
     '</div></div>'+
     (reviewFilter==='due'
-      ?'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'（'+t('due_badge')+'）</button><button class="mark grad" data-m="grad"><span class="mi">★</span>'+t('rv_grad')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
+      ?'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
       :'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>')+
     '<div class="reviewtip">'+(__reviewPending=== 'fuzzy'?t('rv_pending_fuzzy'):__reviewPending==='no'?t('rv_pending_no'):t('review_tip2'))+'</div></div>';
     const body=$('rv-body');
@@ -5790,21 +5820,14 @@ function renderReview(){
 let __reviewPending=null;
 
 /* 按按钮点击时的卡片状态累计当日次数：new→待学习；learning→学习中；mastered→已认识；due→再次复习；graduated→已熟悉 */
-function bumpByStatus(st){
-  if(st==='new') bumpLog('ckNew');
-  else if(st==='learning') bumpLog('ckLearn');
-  else if(st==='mastered') bumpLog('ckMst');
-  else if(st==='due') bumpLog('ckDue');
-  else if(st==='graduated') bumpLog('ckGrad');
-}
-function statusKey(c){ if(c.graduated) return 'graduated'; if(c.status==='mastered') return isDue(c)?'due':'mastered'; return c.status; }
 
 /* 即时标记：点「模糊/不认识」立刻写入学习状态，不等翻面确认 */
 function markFuzzyNow(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
-  bumpByStatus(statusKey(card)); /* 在待学习/学习中状态点按钮 → 累计到对应状态 */
-  card.status='learning'; card.wrongCount++;
+  card.status='learning'; card.wrongCount++; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now();
+  bumpLog('learn');
+  markActiveToday();
   DB.put(card);
 }
 
@@ -5812,22 +5835,25 @@ async function markReview(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
   let alreadyMarked=false;
-  const preKey=statusKey(card); /* 点击前的卡片状态，用于计数（避免刷新 lastReviewedAt 后到期判断失效） */
   if(m==='yes'){
-    /* 「认识」需要先通过中文释义验证，答对才真正标记为已记住 */
+    /* 「认识」需要先通过中文释义验证；再次复习队列：第一次就答对→已熟悉，答错后答对→已认识 */
     const pass=await verifyMeaning(card);
-    if(!pass) return; /* 答错/取消：不标记，停留在当前卡片 */
+    if(!pass) return; /* 取消：不标记，停留在当前卡片 */
     __reviewPending=null;
-    toast(t('vm_pass'));
+    if(card.__dueMode && pass==='first'){ m='grad'; toast(t('grad_ok')); }
+    else toast(t('vm_pass'));
   }
   if(m==='next' && __reviewPending){ /* 翻面后点「下一个」：确认正面所选标记，状态已即时写入 */
     m=__reviewPending; __reviewPending=null; alreadyMarked=true;
   }
   card.reviewCount++; card.lastReviewedAt=Date.now();
-  if(!alreadyMarked) bumpByStatus(preKey); /* 每个状态下点底部按钮都累计一次（按点击前状态） */
-  if(m==='yes'){ card.status='mastered'; card.masteredCount=(card.masteredCount||0)+1; card.masteredAt=Date.now(); }          /* 确认认识：累计记住次数、记录/刷新记住时间，开始下一轮计时 */
-  else if(m==='grad'){ card.graduated=true; card.graduatedAt=Date.now(); }                                                      /* 已熟悉：毕业，不再进入后续轮次 */
-  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; card.masteredAt=0; }  /* 降级：回到学习队列，清除到期计时 */
+  markActiveToday();
+  if(m==='yes'){
+    card.status='mastered'; card.masteredCount=(card.masteredCount||0)+1; card.masteredAt=Date.now();
+    bumpLog(card.__dueMode?'due':'master');                                                                                     /* 再次复习队列点认识→due；首次认识→master */
+  }
+  else if(m==='grad'){ card.graduated=true; card.graduatedAt=Date.now(); bumpLog('grad'); }                                     /* 已熟悉：毕业 */
+  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; card.masteredAt=0; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now(); bumpLog('learn'); }  /* 降级回学习队列 */
   /* m==='next' 且无待定标记：继续下一词，保持当前学习状态不变 */
   await DB.put(card);
   reviewFlipped=false;
@@ -5839,8 +5865,10 @@ async function markReview(m){
 
 /* ===== 「认识」前的中文释义验证 ===== */
 let __vmResolve=null;
+let __vmAttempts=0;
 function vmOpen(card){
   vmStopRecognition(); /* 每个词打开弹窗时清理，保证麦克风始终可用 */
+  __vmAttempts=0;
   $('vm-title').textContent=t('vm_title');
   $('vm-msg').textContent=t('vm_msg1')+card.word+t('vm_msg2');
   $('vm-input').value=''; $('vm-input').placeholder=t('vm_ph');
@@ -5933,8 +5961,9 @@ $('vm-ok').addEventListener('click',()=>{
   vmStopRecognition();
   const card=reviewQueue[reviewIdx];
   if(!card) return;
-  if(!meaningKeywords(card).length){ vmClose(true); return; } /* 无释义：直接通过 */
-  if(answerHit(card,$('vm-input').value)){ vmClose(true); }
+  if(!meaningKeywords(card).length){ vmClose('first'); return; } /* 无释义：直接通过，算第一次答对 */
+  __vmAttempts++;
+  if(answerHit(card,$('vm-input').value)){ vmClose(__vmAttempts===1?'first':'retry'); }
   else{ $('vm-err').style.display='block'; $('vm-input').value=''; setTimeout(()=>{ const el=$('vm-input'); if(el) el.focus(); },30); }
 });
 $('vm-cancel').addEventListener('click',()=>{ if(vmRecognition) try{ vmRecognition.stop(); }catch(e){} vmClose(false); });
@@ -5966,9 +5995,9 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   }
   showView(t.dataset.view);
 }));
-$('rv-search').addEventListener('input',e=>{ reviewQ=e.target.value; reviewQueueBuild(); renderReview(); });
 $('rv-streak-btn').addEventListener('click',()=>{ renderDailyDetail(); showView('daily'); });
 $('daily-back').addEventListener('click',()=>{ showView('review'); refresh(); });
+$('rv-search').addEventListener('input',e=>{ reviewQ=e.target.value; reviewQueueBuild(); renderReview(); });
 $('rv-back').addEventListener('click',()=>{  if(reviewFlipped){
     /* 翻面后点返回：翻回正面，停留在复习页 */
     reviewFlipped=false; renderReview();
@@ -6203,6 +6232,8 @@ function saveAI(key,model){
     localStorage.setItem('sv_ai_model',(model||'doubao-seed-2-0-mini-260428').trim());
   }catch(e){}
 }
+/* 认证/额度错误致命标志：批量任务每轮检查，命中则立即停止，避免干等到 45s 超时 */
+let __aiAuthDead=0;
 async function doubaoAI(promptText,onDelta){
   const cfg=loadAI(); if(!cfg.key) throw new Error('NO_KEY');
   const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),45000);
@@ -6216,6 +6247,7 @@ async function doubaoAI(promptText,onDelta){
     if(!r.ok){
       let msg='HTTP '+r.status;
       try{ const e=await r.json(); if(e&&e.error) msg=e.error.message||e.error.code||msg; }catch(_){}
+      if(r.status===401||r.status===403||r.status===429||/quota|balance|insufficient|unauthorized|invalid.{0,20}key|api.?key|rate.?limit|欠费|余额|额度|exhaust/i.test(msg)) __aiAuthDead=Date.now();
       throw new Error(msg);
     }
     /* 流式接收 SSE，逐段拼出记忆法（实时回调 onDelta，让界面边生成边显示） */
@@ -6240,6 +6272,7 @@ async function doubaoAI(promptText,onDelta){
         }
       }
     }
+    __aiAuthDead=0;
     return out;
   } finally { clearTimeout(to); }
 }
@@ -6731,6 +6764,7 @@ async function autoFixIPA(cards,log){
   let fixed=0; const BATCH=20;
   if(log) log.textContent+='\n'+t('ipa_auto_prog');
   for(let i=0;i<bad.length;i+=BATCH){
+    if(Date.now()-__aiAuthDead<120000){ if(log) log.textContent+='\n'+t('ai_dead_hint'); break; }
     const chunk=bad.slice(i,i+BATCH);
     const prompt='以下是若干英文单词及其中文释义，其音标中可能有损坏字符（?）。请为每个词给出正确的标准美式 IPA 音标。\n'+
       chunk.map(c=>c.word+'：'+(c.meaning||'')).join('\n')+
@@ -6763,6 +6797,7 @@ function backgroundEnrich(pendingWords){
   (async()=>{
     const log=$('import-log');
     for(let s=0;s<pendingWords.length;s+=4){
+      if(Date.now()-__aiAuthDead<120000){ if(log) log.textContent=t('ai_dead_hint'); toast(t('ai_dead_hint')); return; }
       if(token!==__bgToken) return;   // 已有新导入或撤回，放弃本次补全
       await Promise.all(pendingWords.slice(s,s+4).map(async w=>{
         try{
@@ -6847,6 +6882,7 @@ async function applyRestore(data){
   if(data.daycnt) localStorage.setItem('sv_daycnt',data.daycnt);
   else localStorage.removeItem('sv_daycnt');
   if(data.prefs) localStorage.setItem('sv_prefs',data.prefs);
+  if(data.activeDays) localStorage.setItem('sv_active_days',data.activeDays); else localStorage.removeItem('sv_active_days');
   localStorage.removeItem(SV_LAST_IMPORT_KEY);
   await loadBuiltinDelta();
   await refresh();
@@ -6858,7 +6894,8 @@ async function saveAutoBackup(){
   if(!cards.length) return;
   const meta={builtinExtra:await DB.getMeta('builtinExtra')||{},builtinRemoved:await DB.getMeta('builtinRemoved')||{}};
   await DB.setMeta(AUTO_BACKUP_KEY,{at:Date.now(),cards,meta,
-    daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null});
+    daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null,
+    activeDays:localStorage.getItem('sv_active_days')||null});
 }
 async function getAutoBackup(){ return await DB.getMeta(AUTO_BACKUP_KEY)||null; }
 async function clearAutoBackup(){ await DB.setMeta(AUTO_BACKUP_KEY,null); }
@@ -6894,7 +6931,8 @@ $('btn-backup').addEventListener('click',async()=>{
     const cards=await DB.all();
     const meta={builtinExtra:await DB.getMeta('builtinExtra')||{},builtinRemoved:await DB.getMeta('builtinRemoved')||{}};
     const data={app:'sat-vocab',version:2,exportedAt:Date.now(),cards,meta,
-      daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null};
+      daycnt:localStorage.getItem('sv_daycnt')||null,prefs:localStorage.getItem('sv_prefs')||null,
+      activeDays:localStorage.getItem('sv_active_days')||null};
     const d=new Date(), p=n=>String(n).padStart(2,'0');
     const ok=await saveFile('sat-vocab-backup-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'.json', JSON.stringify(data), 'application/json');
     if(ok) toast(t('backup_ok')+cards.length+t('backup_ok2'));
