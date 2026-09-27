@@ -4916,7 +4916,13 @@ async function refresh(){
 }
 function counts(){
   const c={new:0,learning:0,mastered:0,due:0};
-  allCards.forEach(x=>{ if(c[x.status]!=null) c[x.status]++; if(x.status==='mastered'&&isDue(x)) c.due++; });
+  allCards.forEach(x=>{
+    if(x.status==='mastered'){
+      if(x.graduated) return;
+      if(isDue(x)) c.due++; else c.mastered++;
+    }
+    else if(c[x.status]!=null) c[x.status]++;
+  });
   return c;
 }
 /* 已记住复习间隔（天，默认 3）：到期后自动回到复习队列（艾宾浩斯间隔复习） */
@@ -4929,7 +4935,7 @@ function buildQueue(cards, filter){
   let base;
   if(filter==='due') base=cards.filter(c=>isDue(c));                 /* 二轮复习：按间隔到期的已记住词 */
   else if(filter==='graduated') base=cards.filter(c=>c.graduated);   /* 已熟悉：毕业词，不自动进入下一轮，可手动复习 */
-  else if(filter==='mastered') base=cards.filter(c=>c.status==='mastered');
+  else if(filter==='mastered') base=cards.filter(c=>c.status==='mastered'&&!isDue(c)&&!c.graduated);
   else base=cards.filter(c=>(c.status==='new'||c.status==='learning'||(filter==='all'&&isDue(c)))&&(filter==='all'||c.status===filter));
   base.forEach(c=>{ c.__dueMode=isDue(c); });   /* 运行时标记：再次复习队列点认识记 due 埋点，不写库 */
   return base.sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
@@ -5104,7 +5110,12 @@ function renderLibrary(){
     try{ qre=new RegExp('^'+q.split('*').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('.*')+'$','i'); }catch(_){ qre=null; }
   }
   const list=$('lib-list');
-  let items=allCards.filter(c=>libFilter==='all'||c.status===libFilter);
+  let items=allCards.filter(c=>{
+    if(libFilter==='all') return true;
+    if(libFilter==='mastered') return c.status==='mastered'&&!isDue(c)&&!c.graduated;
+    if(libFilter==='due') return c.status==='mastered'&&isDue(c);
+    return c.status===libFilter;
+  });
   if(q){
     items=items.filter(c=>cardSearchHit(c,q,qre));
   }
@@ -5694,7 +5705,7 @@ function rvStats(){
   const q=rvSearchNorm(reviewQ);
   let arr=allCards;
   if(q){ const qre=rvSearchRE(q); arr=allCards.filter(c=>cardSearchHit(c,q,qre)); }
-  const n=arr.filter(x=>x.status==='new').length, l=arr.filter(x=>x.status==='learning').length, m=arr.filter(x=>x.status==='mastered').length, d=arr.filter(x=>isDue(x)).length, g=arr.filter(x=>x.graduated).length;
+  const n=arr.filter(x=>x.status==='new').length, l=arr.filter(x=>x.status==='learning').length, m=arr.filter(x=>x.status==='mastered'&&!isDue(x)&&!x.graduated).length, d=arr.filter(x=>x.status==='mastered'&&isDue(x)).length, g=arr.filter(x=>x.graduated).length;
   return {total:arr.length,new:n,learning:l,mastered:m,due:d,grad:g};
 }
 function reviewQueueBuild(){
@@ -5825,8 +5836,9 @@ let __reviewPending=null;
 function markFuzzyNow(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
-  card.status='learning'; card.wrongCount++; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now();
-  bumpLog('learn');
+  card.wrongCount++;
+  if(card.__dueMode){ card.status='mastered'; card.masteredAt=Date.now(); bumpLog('due'); }  /* 再次复习队列：回到已认识重新计时 */
+  else { card.status='learning'; card.masteredAt=0; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now(); bumpLog('learn'); }  /* 学习中：降级回学习队列 */
   markActiveToday();
   DB.put(card);
 }
@@ -5853,12 +5865,16 @@ async function markReview(m){
     bumpLog(card.__dueMode?'due':'master');                                                                                     /* 再次复习队列点认识→due；首次认识→master */
   }
   else if(m==='grad'){ card.graduated=true; card.graduatedAt=Date.now(); bumpLog('grad'); }                                     /* 已熟悉：毕业 */
-  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){ card.status='learning'; card.wrongCount++; card.masteredAt=0; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now(); bumpLog('learn'); }  /* 降级回学习队列 */
+  else if(!alreadyMarked && (m==='fuzzy'||m==='no')){
+    card.wrongCount++;
+    if(card.__dueMode){ card.status='mastered'; card.masteredAt=Date.now(); bumpLog('due'); }  /* 再次复习队列：回到已认识重新计时 */
+    else { card.status='learning'; card.masteredAt=0; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now(); bumpLog('learn'); }  /* 学习中：降级回学习队列 */
+  }
   /* m==='next' 且无待定标记：继续下一词，保持当前学习状态不变 */
   await DB.put(card);
   reviewFlipped=false;
   reviewQueue.splice(reviewIdx,1);
-  if(m==='fuzzy'||m==='no') reviewQueue.push(card); /* 模糊/不认识：移到队尾，稍后再出现 */
+  if((m==='fuzzy'||m==='no') && !card.__dueMode) reviewQueue.push(card); /* 学习中模糊：移到队尾稍后再出现；再次复习模糊：直接移除回已认识 */
   if(reviewIdx>=reviewQueue.length) reviewIdx=Math.max(0,reviewQueue.length-1);
   renderAll();
 }
