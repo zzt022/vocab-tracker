@@ -5791,8 +5791,8 @@ function renderReview(){
     (card.example?'<div class="rrow"><b>'+t('f_example_short')+'</b><em>'+esc(card.example)+'</em></div>':'')+
     '</div></div>'+
     (reviewFilter==='due'
-      ?'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
-      :'<div class="markrow"><button class="mark yes" data-m="yes"><span class="mi">✓</span>'+t('yes')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>')+
+      ?'<div class="markrow"><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
+      :'<div class="markrow"><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>')+
     '<div class="reviewtip">'+(__reviewPending=== 'fuzzy'?t('rv_pending_fuzzy'):__reviewPending==='no'?t('rv_pending_no'):t('review_tip2'))+'</div></div>';
     const body=$('rv-body');
     body.querySelectorAll('.mark').forEach(b=>b.addEventListener('click',()=>markReview(b.dataset.m)));
