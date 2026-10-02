@@ -5791,7 +5791,7 @@ function renderReview(){
     (card.example?'<div class="rrow"><b>'+t('f_example_short')+'</b><em>'+esc(card.example)+'</em></div>':'')+
     '</div></div>'+
     (reviewFilter==='due'
-      ?'<div class="markrow"><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
+      ?'<div class="markrow"><button class="mark grad" data-m="grad"><span class="mi">★</span>'+t('rv_grad')+'</button><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>'
       :'<div class="markrow"><button class="mark next" data-m="next"><span class="mi">→</span>'+t('rv_next')+'</button></div>')+
     '<div class="reviewtip">'+(__reviewPending=== 'fuzzy'?t('rv_pending_fuzzy'):__reviewPending==='no'?t('rv_pending_no'):t('review_tip2'))+'</div></div>';
     const body=$('rv-body');
@@ -6874,10 +6874,20 @@ function showManualSave(filename, blob){
 function closeManualSave(){ const box=$('manual-save-modal'); if(box) box.classList.remove('show'); }
 $('ms-close').addEventListener('click',closeManualSave);
 $('btn-export').addEventListener('click',async()=>{
-  const head=['word','pos','meaning','phonetic_us','phonetic_uk','root','mnemonic','example','status','tag'];
+  const head=['word','pos','meaning','phonetic_us','phonetic_uk','root','mnemonic','example','学习状态','tag'];
+  const stLabel=c=>{
+    if(c.status==='new') return t('st_new');
+    if(c.status==='learning') return t('st_learning');
+    if(c.status==='mastered'){
+      if(c.graduated) return t('rv_grad');
+      if(isDue(c)) return t('rv_round2');
+      return t('st_mastered');
+    }
+    return c.status||'';
+  };
   const rows=[head.join(',')];
   for(const c of allCards){
-    rows.push([c.word,c.pos,c.meaning,c.phonetic_us,c.phonetic_uk,c.root,c.mnemonic,(c.example||'').replace(/,/g,'，'),c.status,(c.tag||'').replace(/,/g,'，')]
+    rows.push([c.word,c.pos,c.meaning,c.phonetic_us,c.phonetic_uk,c.root,c.mnemonic,(c.example||'').replace(/,/g,'，'),stLabel(c),(c.tag||'').replace(/,/g,'，')]
       .map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(','));
   }
   const ok=await saveFile('sat-vocab-export.csv', '\ufeff'+rows.join('\n'), 'text/csv');
