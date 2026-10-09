@@ -4907,7 +4907,7 @@ let __counts={new:0,learning:0,mastered:0};
 async function refresh(){
   const done=reviewIdx;
   allCards=await DB.all();
-  allCards.sort((a,b)=>b.createdAt-a.createdAt);
+  allCards.sort((a,b)=>(a.lastReviewedAt||a.createdAt)-(b.lastReviewedAt||b.createdAt));
   /* 复习队列随最新数据重建：新词自动入队、已记住词排除、进行中进度尽量保留 */
   reviewQueue=buildQueue(allCards);
   reviewIdx=Math.min(done,Math.max(0,reviewQueue.length-1));
@@ -4938,7 +4938,7 @@ function buildQueue(cards, filter){
   else if(filter==='mastered') base=cards.filter(c=>c.status==='mastered'&&!isDue(c)&&!c.graduated);
   else base=cards.filter(c=>(c.status==='new'||c.status==='learning'||(filter==='all'&&isDue(c)))&&(filter==='all'||c.status===filter));
   base.forEach(c=>{ c.__dueMode=isDue(c); });   /* 运行时标记：再次复习队列点认识记 due 埋点，不写库 */
-  return base.sort((a,b)=>(b.wrongCount-a.wrongCount)||(a.createdAt-b.createdAt));
+  return base.sort((a,b)=>(a.lastReviewedAt||a.createdAt)-(b.lastReviewedAt||b.createdAt));
 }
 function renderAll(){ __counts=counts(); renderHeader(); renderRecent(); renderLibrary(); renderReview(); renderDaily(); }
 /* 每日动作计数（轻量）：学习/复习动作发生时 +1，用于统计「再次学习/再次复习」次数 */
