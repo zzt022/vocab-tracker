@@ -5811,7 +5811,7 @@ function renderReview(){
       try{
         const memo=await doubaoAI(doubaoMemoPrompt(card),(d,f)=>{ text.textContent=f; });
         if(memo){
-          card.mnemonic=memo.trim(); await DB.put(card);
+          card.mnemonic=memo.trim(); card.lastReviewedAt=Date.now(); await DB.put(card);
           /* 同步内存词表（双保险） */
           const ai=allCards.findIndex(x=>x.id===card.id);
           if(ai>=0) allCards[ai].mnemonic=card.mnemonic;
@@ -5836,7 +5836,7 @@ let __reviewPending=null;
 function markFuzzyNow(m){
   const card=reviewQueue[reviewIdx];
   if(!card) return;
-  card.wrongCount++;
+  card.wrongCount++; card.lastReviewedAt=Date.now();
   if(card.__dueMode){ card.status='mastered'; card.masteredAt=Date.now(); bumpLog('due'); }  /* 再次复习队列：回到已认识重新计时 */
   else { card.status='learning'; card.masteredAt=0; if(!card.firstLearnedAt) card.firstLearnedAt=Date.now(); bumpLog('learn'); }  /* 学习中：降级回学习队列 */
   markActiveToday();
@@ -6067,6 +6067,7 @@ function fillCardDetail(c){
       if(us||uk){
         if((!c2.phonetic_us&&us)||(bad2&&us)) c2.phonetic_us=us;  /* 异常音标允许被覆盖 */
         if((!c2.phonetic_uk&&uk)||(bad2&&uk)) c2.phonetic_uk=uk;
+        c2.lastReviewedAt=Date.now();
         await DB.put(c2); refresh();
         fillCardDetail(allCards.find(x=>x.id===editingId)||c2);
         toast(t('t_phon_ok'));
@@ -6108,7 +6109,7 @@ function fillCardDetail(c){
       try{
         const chg=await doubaoFillInfo(cc);
         if(!cc.phonetic_us||!cc.phonetic_uk) await doubaoFillIPA(cc);
-        if(chg){ await DB.put(cc); refresh(); fillCardDetail(allCards.find(x=>x.id===editingId)||cc); toast(t('t_ai_auto')); }
+        if(chg){ cc.lastReviewedAt=Date.now(); await DB.put(cc); refresh(); fillCardDetail(allCards.find(x=>x.id===editingId)||cc); toast(t('t_ai_auto')); }
       }catch(e){} finally { cc.__aiFilling=false; }
     })();
   }
@@ -6408,6 +6409,7 @@ $('cd-save').addEventListener('click',async()=>{
     c.example=$('cd-example').value.trim();
     c.pending=!c.meaning;
     c.pendingReason=c.pending?t('meaning_pending'):'';
+    c.lastReviewedAt=Date.now();
     await DB.put(c);
     toast(t('t_saved_ok'));
     try{ refresh(); }catch(e){ console.error(e); }
@@ -6425,6 +6427,7 @@ $('cd-delete').addEventListener('click',async()=>{
 $('cd-grad').addEventListener('click',async()=>{
   const c=allCards.find(x=>x.id===editingId); if(!c) return;
   c.graduated=!c.graduated;
+  c.lastReviewedAt=Date.now();
   await DB.put(c); refresh();
   fillCardDetail(allCards.find(x=>x.id===editingId)||c);
   toast(c.graduated?t('grad_ok'):t('ungrad_ok'));
