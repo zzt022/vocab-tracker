@@ -157,6 +157,8 @@ nav.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100
 .importrow:hover{border-color:var(--accent);color:var(--accent);}
 .importrow svg{width:16px;height:16px;}
 .worditem{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--border);}
+.lib-more{display:block;width:100%;margin:14px 0 6px;padding:11px;border:1.5px dashed var(--border);border-radius:12px;background:var(--card);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:.15s;}
+.lib-more:hover{border-color:var(--accent);color:var(--accent);background:#F6F7F9;}
 .worditem:last-child{border-bottom:none;}
 .worditem .w{font-size:15.5px;font-weight:600;min-width:104px;}
 .worditem .w .star,.dword .w .star,.flipcard .w .star{color:var(--accent);font-weight:700;margin-left:2px;}
@@ -736,7 +738,7 @@ const I18N={
     t_builtin_import_ok:'内置词库导入完成', t_builtin_clear_ok:'已清空内置词库', t_builtin_restore_ok:'已恢复默认词库',
     t_builtin_search:'没有匹配的词', t_builtin_empty:'内置词库为空',
     t_pos_hint:'词性，如 v.', t_zh_hint:'该词性对应的中文释义', t_del_row:'删除此行',
-    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音', ipa_bad:'音标待修复', ipa_bad_hint:'音标含异常字符（可能来自文件转换），点击下方按钮用豆包重新生成', t_fix_phon:'用豆包修复音标', ipa_auto_nokey1:'检测到 ', ipa_auto_nokey2:' 个异常音标；在「设置 → 大模型 API 配置」填入 Key 后，导入时可自动修复', ipa_auto_prog:'\n正在用豆包批量修复音标… ', ipa_auto_ok1:'已自动修复 ', ipa_auto_ok2:' 个音标', rev_int:'复习间隔设置', rev_int_title:'已认识复习间隔', rev_int_help:'已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。', rev_int_label:'间隔天数', rev_int_saved:'已认识复习间隔已保存', rev_int_day:' 天', rv_due1:'有 ', rv_due2:' 个已认识的词需复习，已自动加入复习队列（点「认识」确认后重新计时）', due_badge:'需复习', due_hint:'已认识需复习，已自动加入复习队列；复习时点「认识」确认后重新计时', grad_badge:'熟悉', grad_hint:'已标记熟悉：不再自动安排复习，可在详情页取消', cd_grad:'标记为熟悉', cd_ungrad:'取消熟悉', grad_ok:'已标记为熟悉，不再自动安排复习', ungrad_ok:'已取消熟悉，将按间隔继续复习', rv_round2:'再次复习', rv_grad:'已熟悉', known_due:'认识', rv_empty_due:'暂无需复习的已认识词', rv_empty_grad:'暂无已熟悉的词', dl_stat:'今日统计', dl_streak:'连续学习', dl_days:' 天', dl_week:['日','一','二','三','四','五','六'], dl_30:'近30天每日统计', dl_today:'今天', dl_date:'日期', dl_new:'新增', dl_total:'变化总数', dl_total_note:'不含新增',
+    t_star_hint:'不在内置词库中，释义可能来自在线查询或手动补充', t_lib_more:'加载更多', t_am:'美式', t_uk:'英式', speak:'朗读', speak_am:'朗读美音', speak_uk:'朗读英音', ipa_bad:'音标待修复', ipa_bad_hint:'音标含异常字符（可能来自文件转换），点击下方按钮用豆包重新生成', t_fix_phon:'用豆包修复音标', ipa_auto_nokey1:'检测到 ', ipa_auto_nokey2:' 个异常音标；在「设置 → 大模型 API 配置」填入 Key 后，导入时可自动修复', ipa_auto_prog:'\n正在用豆包批量修复音标… ', ipa_auto_ok1:'已自动修复 ', ipa_auto_ok2:' 个音标', rev_int:'复习间隔设置', rev_int_title:'已认识复习间隔', rev_int_help:'已认识的单词需复习时，将自动回到复习队列（艾宾浩斯间隔复习）；复习时再次确认认识会重置计时，点「模糊/不认识」则回到学习队列。', rev_int_label:'间隔天数', rev_int_saved:'已认识复习间隔已保存', rev_int_day:' 天', rv_due1:'有 ', rv_due2:' 个已认识的词需复习，已自动加入复习队列（点「认识」确认后重新计时）', due_badge:'需复习', due_hint:'已认识需复习，已自动加入复习队列；复习时点「认识」确认后重新计时', grad_badge:'熟悉', grad_hint:'已标记熟悉：不再自动安排复习，可在详情页取消', cd_grad:'标记为熟悉', cd_ungrad:'取消熟悉', grad_ok:'已标记为熟悉，不再自动安排复习', ungrad_ok:'已取消熟悉，将按间隔继续复习', rv_round2:'再次复习', rv_grad:'已熟悉', known_due:'认识', rv_empty_due:'暂无需复习的已认识词', rv_empty_grad:'暂无已熟悉的词', dl_stat:'今日统计', dl_streak:'连续学习', dl_days:' 天', dl_week:['日','一','二','三','四','五','六'], dl_30:'近30天每日统计', dl_today:'今天', dl_date:'日期', dl_new:'新增', dl_total:'变化总数', dl_total_note:'不含新增',
  ago_now:'刚刚', ago_min:' 分钟前', ago_hour:' 小时前', ago_day:' 天前',
     t_flip:'翻面查看', t_loading:'导入中…', t_done:'完成', page_of:' 页 · 共 ', words2:' 词',
     st_all:'全部', builtin_extra:'为你导入', builtin_more:'，另有 ', builtin_add:'收录', builtin_added:'已收录',
@@ -825,7 +827,7 @@ const I18N={
     t_builtin_import_ok:'Built-in library imported', t_builtin_clear_ok:'Built-in library cleared', t_builtin_restore_ok:'Default library restored',
     t_builtin_search:'No matching words', t_builtin_empty:'Built-in library is empty',
     t_pos_hint:'POS, e.g. v.', t_zh_hint:'Chinese meaning for this POS', t_del_row:'Delete this row',
-    t_star_hint:'Not in built-in library; meaning may come from online lookup or manual edit', t_am:'US', t_uk:'UK', speak:'Speak', speak_am:'Speak US', speak_uk:'Speak UK', ipa_bad:'Fix IPA', ipa_bad_hint:'IPA contains broken characters (often from file conversion). Tap the button below to regenerate with the LLM', t_fix_phon:'Fix IPA with LLM', ipa_auto_nokey1:'Found ', ipa_auto_nokey2:' broken IPA entries; configure the LLM API key in Settings to auto-fix on import', ipa_auto_prog:'\nFixing IPA with the LLM… ', ipa_auto_ok1:'Auto-fixed ', ipa_auto_ok2:' IPA entries', rev_int:'Review interval', rev_int_title:'Known review interval', rev_int_help:'Known words come back to the review queue automatically when due (Ebbinghaus spaced review). Confirming "Know" resets the timer; tapping "Fuzzy"/"Don\'t know" sends the word back to the learning queue.', rev_int_label:'Interval (days)', rev_int_saved:'Review interval saved', rev_int_day:' day(s)', rv_due1:'', rv_due2:' known word(s) are now due and were added to the review queue (tap "Know" to confirm and restart the timer)', due_badge:'Due', due_hint:'Known word is due; tap "Know" during review to confirm and restart the timer', grad_badge:'Familiar', grad_hint:'Marked familiar: no longer auto-scheduled for review; undo from the card detail', cd_grad:'Mark as familiar', cd_ungrad:'Undo familiar', grad_ok:'Marked as familiar — no longer auto-scheduled', ungrad_ok:'Familiar mark removed — will be reviewed on schedule again', rv_round2:'Review again', rv_grad:'Familiar', known_due:'Known (review)', rv_empty_due:'No due words', rv_empty_grad:'No familiar words', dl_stat:'Daily', dl_streak:'Streak', dl_days:' d', dl_week:['S','M','T','W','T','F','S'], dl_30:'Daily stats · last 30 days', dl_today:'today', dl_date:'Date', dl_new:'New', dl_total:'Total', dl_total_note:'excl. new',
+    t_star_hint:'Not in built-in library; meaning may come from online lookup or manual edit', t_lib_more:'Load more', t_am:'US', t_uk:'UK', speak:'Speak', speak_am:'Speak US', speak_uk:'Speak UK', ipa_bad:'Fix IPA', ipa_bad_hint:'IPA contains broken characters (often from file conversion). Tap the button below to regenerate with the LLM', t_fix_phon:'Fix IPA with LLM', ipa_auto_nokey1:'Found ', ipa_auto_nokey2:' broken IPA entries; configure the LLM API key in Settings to auto-fix on import', ipa_auto_prog:'\nFixing IPA with the LLM… ', ipa_auto_ok1:'Auto-fixed ', ipa_auto_ok2:' IPA entries', rev_int:'Review interval', rev_int_title:'Known review interval', rev_int_help:'Known words come back to the review queue automatically when due (Ebbinghaus spaced review). Confirming "Know" resets the timer; tapping "Fuzzy"/"Don\'t know" sends the word back to the learning queue.', rev_int_label:'Interval (days)', rev_int_saved:'Review interval saved', rev_int_day:' day(s)', rv_due1:'', rv_due2:' known word(s) are now due and were added to the review queue (tap "Know" to confirm and restart the timer)', due_badge:'Due', due_hint:'Known word is due; tap "Know" during review to confirm and restart the timer', grad_badge:'Familiar', grad_hint:'Marked familiar: no longer auto-scheduled for review; undo from the card detail', cd_grad:'Mark as familiar', cd_ungrad:'Undo familiar', grad_ok:'Marked as familiar — no longer auto-scheduled', ungrad_ok:'Familiar mark removed — will be reviewed on schedule again', rv_round2:'Review again', rv_grad:'Familiar', known_due:'Known (review)', rv_empty_due:'No due words', rv_empty_grad:'No familiar words', dl_stat:'Daily', dl_streak:'Streak', dl_days:' d', dl_week:['S','M','T','W','T','F','S'], dl_30:'Daily stats · last 30 days', dl_today:'today', dl_date:'Date', dl_new:'New', dl_total:'Total', dl_total_note:'excl. new',
  ago_now:'just now', ago_min:' min ago', ago_hour:' hr ago', ago_day:' day(s) ago',
     t_flip:'Flip to see answer', t_loading:'Importing…', t_done:'Done', page_of:' pages · ', words2:' words',
     st_all:'All', builtin_extra:'imported by you', builtin_more:', another ', builtin_add:'Add', builtin_added:'Added',
@@ -4898,7 +4900,8 @@ async function addWord(word, source){
 }
 
 /* ===== 全局状态与渲染 ===== */
-let allCards=[], libFilter='all', libSearch='';
+let allCards=[], libFilter='all', libSearch='', libPage=0;
+const LIB_PAGE=80; /* 词库列表分页：避免 4000+ 词全量渲染卡顿 */
 let reviewQueue=[], reviewIdx=0, reviewFlipped=false, reviewFilter='all';
 let editingId=null, lastView='record', reviewFrom='record';
 /* 各状态计数缓存：refresh 时算一次，各渲染函数共用，避免重复遍历 */
@@ -5080,15 +5083,17 @@ function renderRecent(){
 function wordItemHTML(c){
   const pending=c.pending?' <span class="badge pending">'+t('status_pending')+'</span>':'';
   const wrong=(c.status==='learning'&&c.reviewCount>0)?' <span class="badge wrong" title="'+t('learn_times')+c.reviewCount+t('times_word')+'">✕'+c.reviewCount+'</span>':'';
-  const star=lookupBuiltin(c.word)?'':'<span class="star" title="'+t('t_star_hint')+'">*</span>';
-  const tag=tagOf(c)?'<span class="tagb" title="'+esc(tagOf(c))+'">'+esc(tagOf(c))+'</span>':'';
+  const inBuiltin=lookupBuiltin(c.word);
+  const star=inBuiltin?'':'<span class="star" title="'+t('t_star_hint')+'">*</span>';
+  const tg=tagOf(c);
+  const tag=tg?'<span class="tagb" title="'+esc(tg)+'">'+esc(tg)+'</span>':'';
   const ibad=ipaBroken(c)?' <span class="badge ipabad" title="'+t('ipa_bad_hint')+'">'+t('ipa_bad')+'</span>':'';
   const due=isDue(c)?' <span class="badge due" title="'+t('due_hint')+'">'+t('due_badge')+'</span>':'';
   const grad=c.graduated?' <span class="badge grad" title="'+t('grad_hint')+'">'+t('grad_badge')+'</span>':'';
   let stat='';
   if(c.status==='mastered') stat='<span class="dstat">'+t('mst_cnt')+Math.max(1,c.masteredCount||0)+t('times_word')+(c.graduated?'<span class="badge due mini" title="'+t('due_hint')+'">R'+Math.max(0,(c.masteredCount||1)-1)+'</span>':'')+(c.lastReviewedAt?' · '+t('st_rev_last')+relTime(c.lastReviewedAt):'')+'</span>';
   else if(c.status==='learning'&&c.lastReviewedAt) stat='<span class="dstat">'+t('st_rev_last')+relTime(c.lastReviewedAt)+'</span>';
-  return '<div class="worditem"><span class="w">'+esc(c.word)+star+tag+'</span>'+
+  return '<div class="worditem" data-id="'+c.id+'"><span class="w">'+esc(c.word)+star+tag+'</span>'+
     '<span class="d">'+ipaWrap(c.phonetic_us)+' '+ipaWrap(c.phonetic_uk)+ibad+'<br>'+esc(c.pos+' '+(c.meaning||t('meaning_pending')))+'</span>'+
     stat+
     grad+due+'<span class="badge '+esc(c.status)+'">'+STATUS_NAME[c.status]+'</span>'+wrong+pending+
@@ -5097,11 +5102,11 @@ function wordItemHTML(c){
 
 /* ===== 词库页 ===== */
 function renderLibrary(){
-  const c=counts();
+  const c=__counts||counts();
   const chips=[['all',t('st_all')+' '+allCards.length],['new',t('st_new')+' '+c.new],['learning',t('st_learning')+' '+c.learning],['mastered',t('st_mastered')+' '+c.mastered]];
   $('lib-chips').innerHTML=chips.map(([k,label])=>'<button class="chip'+(libFilter===k?' on':'')+'" data-f="'+k+'">'+label+'</button>').join('');
   $('lib-chips').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{
-    libFilter=el.dataset.f; closeBuiltinPanel(); renderLibrary();
+    libFilter=el.dataset.f; libPage=0; closeBuiltinPanel(); renderLibrary();
   }));
   const q=libSearch.trim().toLowerCase().replace(/[\uFF01-\uFF5E]/g,ch=>String.fromCharCode(ch.charCodeAt(0)-0xFEE0)).replace(/\u3000/g,' '); /* 全角→半角（含＊→*） */
   /* 通配符搜索：* 可匹配任意字符（ab* 前缀、*tion 后缀、a*b 模糊）；单独一个 * = 筛出所有带星号标记（非内置词库）的单词 */
@@ -5123,10 +5128,17 @@ function renderLibrary(){
     list.innerHTML='<div class="empty">'+(q?t('t_no_match')+'「'+esc(q)+'」':t('t_lib_empty')+'<br><span class="sub">'+t('t_go_import')+'</span>')+'</div>';
     return;
   }
-  list.innerHTML=items.map(c=>wordItemHTML(c)).join('');
-  list.querySelectorAll('.worditem').forEach((el,i)=>{
-    el.addEventListener('click',()=>openCard(items[i].id));
+  /* 分页渲染：每页 LIB_PAGE 个，「加载更多」按需追加，避免大词库一次全量渲染卡顿 */
+  const total=items.length, pageCount=Math.ceil(total/LIB_PAGE);
+  if(libPage>=pageCount) libPage=pageCount-1;
+  const shown=items.slice(0,(libPage+1)*LIB_PAGE);
+  list.innerHTML=shown.map(c=>wordItemHTML(c)).join('')
+    +(shown.length<total?'<button class="lib-more" id="lib-more">'+t('t_lib_more')+'（'+shown.length+'/'+total+'）</button>':'');
+  list.querySelectorAll('.worditem').forEach(el=>{
+    el.addEventListener('click',()=>openCard(el.dataset.id));
   });
+  const more=$('lib-more');
+  if(more) more.addEventListener('click',()=>{ libPage++; renderLibrary(); });
 }
 
 /* 卡片搜索命中：单词 / 释义 / 标签；# 开头仅匹配标签；* 通配符；「待补充」等关键词匹配释义待补充的词 */
@@ -6004,7 +6016,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   else{ lastView=t.dataset.view; }
   if(t.dataset.view==='library'){
     /* 进入词库页默认显示「全部」，清空上次的筛选与搜索 */
-    libFilter='all'; libSearch='';
+    libFilter='all'; libSearch=''; libPage=0;
     const si=document.getElementById('in-search');
     if(si) si.value='';
     renderLibrary();
@@ -6982,7 +6994,7 @@ $('restore-file').addEventListener('change',async e=>{
 });
 
 /* ===== 搜索 ===== */
-$('in-search').addEventListener('input',e=>{ libSearch=e.target.value; closeBuiltinPanel(); renderLibrary(); });
+$('in-search').addEventListener('input',e=>{ libSearch=e.target.value; libPage=0; closeBuiltinPanel(); renderLibrary(); });
 
 /* ===== 初始化 ===== */
 (async function(){
