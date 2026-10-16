@@ -4900,7 +4900,7 @@ async function addWord(word, source){
 }
 
 /* ===== 全局状态与渲染 ===== */
-let allCards=[], libFilter='all', libSearch='', libPage=0;
+let allCards=[], libFilter='all', libSearch='', libPage=0, libMoreObs=null;
 const LIB_PAGE=80; /* 词库列表分页：避免 4000+ 词全量渲染卡顿 */
 let reviewQueue=[], reviewIdx=0, reviewFlipped=false, reviewFilter='all';
 let editingId=null, lastView='record', reviewFrom='record';
@@ -5138,7 +5138,15 @@ function renderLibrary(){
     el.addEventListener('click',()=>openCard(el.dataset.id));
   });
   const more=$('lib-more');
-  if(more) more.addEventListener('click',()=>{ libPage++; renderLibrary(); });
+  if(more){
+    more.addEventListener('click',()=>{ libPage++; renderLibrary(); });
+    /* 滚动到底自动加载下一页：观察「加载更多」按钮进入视口即加载 */
+    if(libMoreObs) libMoreObs.disconnect();
+    libMoreObs=new IntersectionObserver(entries=>{
+      if(entries.some(e=>e.isIntersecting)){ libPage++; renderLibrary(); }
+    },{rootMargin:'120px 0px'});
+    libMoreObs.observe(more);
+  }else if(libMoreObs){ libMoreObs.disconnect(); libMoreObs=null; }
 }
 
 /* 卡片搜索命中：单词 / 释义 / 标签；# 开头仅匹配标签；* 通配符；「待补充」等关键词匹配释义待补充的词 */
@@ -7000,6 +7008,8 @@ $('in-search').addEventListener('input',e=>{ libSearch=e.target.value; libPage=0
 (async function(){
   try{
     applyLang();
+    /* 首屏非阻塞：先用空数据渲染页面骨架，避免读库(4000+词)期间白屏等待 */
+    renderAll();
     await openDB();
     await loadBuiltinDelta();
     await refresh();
