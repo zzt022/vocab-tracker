@@ -5016,7 +5016,7 @@ function computeDaily(){
     const u=L.due||L.ckDue||0;
     const g=L.grad||L.ckGrad||0;
     days30.push({date:(d.getMonth()+1)+'/'+d.getDate(), wd:d.getDay(), today:i===0, ts:d.getTime(),
-      add:a, nL:a, inL:n, inM:m, inD:u, inG:g, total:a+n+m+u+g});
+      add:a, nL:a, inL:n, inM:m, inD:u, inG:g, total:n+m+u+g}); /* 变化总数 = 学习动作次数，不含新增 */
   }
   return {streak,days30,todayLog:lg,todayNew,todayReview,todayMaster};
 }
